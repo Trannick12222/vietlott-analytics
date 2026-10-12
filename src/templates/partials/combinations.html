@@ -1,0 +1,324 @@
+<div class="space-y-6">
+    <!-- Sub-tabs: 15 Dãy Tuyển Chọn vs Ma Trận Wheeling vs Dàn Vé Bao -->
+    <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+        <div class="flex flex-wrap gap-2">
+            <button id="btn-combo-standard" onclick="switchComboMode('standard')" class="combo-mode-btn bg-blue-600 text-white text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5">
+                <span>🎯</span> <span data-i18n="tab_standard_combos">15 Dãy Tuyển Chọn</span>
+            </button>
+            <button id="btn-combo-wheeling" onclick="switchComboMode('wheeling')" class="combo-mode-btn bg-slate-700 hover:bg-slate-600 text-gray-300 text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5">
+                <span>⚡</span> <span data-i18n="tab_wheeling_matrix">Ma Trận Wheeling (Tiết Kiệm 99%)</span>
+                <span class="bg-emerald-500 text-slate-900 text-[10px] px-1.5 py-0.5 rounded-full font-black uppercase tracking-wider">HOT</span>
+            </button>
+            <button id="btn-combo-bao" onclick="switchComboMode('bao')" class="combo-mode-btn bg-slate-700 hover:bg-slate-600 text-gray-300 text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5">
+                <span>💎</span> <span data-i18n="tab_bao_combos">Dàn Số Bao (Bao 5 - 18)</span>
+            </button>
+            <button id="btn-combo-custom" onclick="switchComboMode('custom')" class="combo-mode-btn bg-slate-700 hover:bg-slate-600 text-gray-300 text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5">
+                <span>🛠️</span> <span data-i18n="tab_custom_pool">Dàn Số Tự Chọn (Custom)</span>
+                <span class="bg-indigo-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-black uppercase tracking-wider">NEW</span>
+            </button>
+        </div>
+        <button onclick="refreshCurrentCombo()" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded border border-slate-600 transition flex items-center gap-1">
+            <span>🔄</span> <span data-i18n="btn_recalc_combos">Sinh lại bộ số</span>
+        </button>
+    </div>
+
+    <!-- KHU VỰC 1: 15 DÃY SỐ SIÊU TUYỂN CHỌN -->
+    <div id="section-combo-standard" class="space-y-4">
+        <div class="bg-indigo-950/40 border border-indigo-700/60 rounded-lg p-3 text-xs text-indigo-200 flex items-start gap-2.5">
+            <span class="text-base">🧬</span>
+            <div class="space-y-0.5">
+                <strong data-i18n="combos_banner_title">15 Dãy số siêu tuyển chọn (Bao quát toàn diện 5 chiến lược & 21 công thức toán học):</strong>
+                <p class="text-indigo-300 text-[11px]" data-i18n="combos_banner_desc">
+                    Bao gồm: 🏆 <strong>Tối Ưu Phong Độ</strong> (Hot Elite), ⚖️ <strong>Cân Bằng Chu Kỳ</strong> (Rebound), ❄️ <strong>Săn Số Gan & Dị Biệt</strong> (Cold Outbreak - ngừa các kỳ lệch dải cao như 04/10), 🔵 <strong>Nén Dải Thấp</strong> (Low Compression - ngừa các kỳ rút thấp như #1400), và 🌊 <strong>Bước Nhảy Delta</strong> (Spread).
+                </p>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="combinations-grid">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- KHU VỰC 2: MA TRẬN WHEELING SYSTEM (MỚI) -->
+    <div id="section-combo-wheeling" class="hidden space-y-4">
+        <!-- Banner giải thích Wheeling System -->
+        <div class="bg-emerald-950/40 border border-emerald-600/70 rounded-lg p-3.5 text-xs text-emerald-200 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-sm text-emerald-300">
+                <span>⚡</span> Chiến Lược Ma Trận Che Phủ (Lottery Wheeling System)
+            </div>
+            <p class="text-emerald-300/90 leading-relaxed text-[11px]">
+                Thay vì phải chi tiền triệu để mua vé bao đầy đủ, thuật toán Ma trận che phủ toán học (Covering Design) sẽ chọn ra tập hợp 10 – 14 con số xuất sắc nhất rồi <strong>nén lại thành đúng 4 – 8 vé (chỉ từ 40k – 80k VNĐ)</strong> mà vẫn <strong>bảo toàn độ bao phủ tối đa</strong> và bảo đảm trúng giải phụ!
+            </p>
+        </div>
+
+        <!-- Bộ chọn gói Wheeling & Chiến lược -->
+        <div class="bg-slate-900/60 p-3.5 rounded-lg border border-slate-700/70 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-semibold text-slate-300">Gói số lượng:</span>
+                    <div class="flex gap-2" id="wheel-size-selector">
+                        <button onclick="selectWheelSize(10)" class="wheel-btn px-3 py-1.5 text-xs rounded-lg font-bold bg-slate-700 text-slate-300 hover:bg-slate-600 transition" data-wheel="10">
+                            Wheel 10 Số (4 Vé · 40k)
+                        </button>
+                        <button onclick="selectWheelSize(12)" class="wheel-btn px-3 py-1.5 text-xs rounded-lg font-bold bg-emerald-600 text-white shadow transition flex items-center gap-1" data-wheel="12">
+                            ⭐ Wheel 12 Số (6 Vé · 60k)
+                        </button>
+                        <button onclick="selectWheelSize(14)" class="wheel-btn px-3 py-1.5 text-xs rounded-lg font-bold bg-slate-700 text-slate-300 hover:bg-slate-600 transition" data-wheel="14">
+                            Wheel 14 Số (8 Vé · 80k)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Nút sao chép toàn bộ vé trong gói wheeling -->
+                <button onclick="copyAllWheelTickets()" class="text-xs bg-emerald-700 hover:bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1">
+                    📋 Sao chép toàn bộ vé
+                </button>
+            </div>
+
+            <!-- Chiến lược dàn bóng cốt lõi Wheeling -->
+            <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800 text-xs">
+                <span class="text-slate-400 font-semibold">Chiến lược dàn số gốc:</span>
+                <div class="flex flex-wrap gap-1.5" id="wheel-strat-selector">
+                    <button onclick="selectWheelStrategy('balanced')" class="wheel-strat-btn px-2.5 py-1 text-xs rounded font-bold bg-emerald-600 text-white shadow transition flex items-center gap-1" data-strat="balanced">
+                        ⚖️ Cân Bằng Chuẩn
+                    </button>
+                    <button onclick="selectWheelStrategy('cold_outbreak')" class="wheel-strat-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600 transition flex items-center gap-1" data-strat="cold_outbreak" title="Đón đợt nổ xả gan dị biệt">
+                        ❄️ Săn Số Gan (Dị Biệt)
+                    </button>
+                    <button onclick="selectWheelStrategy('low_comp')" class="wheel-strat-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600 transition flex items-center gap-1" data-strat="low_comp" title="Ép dàn bóng <= 40 cho kỳ rút thấp">
+                        🔵 Nén Dải Thấp (Rút Thấp)
+                    </button>
+                    <button onclick="selectWheelStrategy('elite')" class="wheel-strat-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600 transition flex items-center gap-1" data-strat="elite">
+                        🔥 Thuần Phong Độ
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thống kê so sánh hiệu quả chi phí -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3" id="wheel-stats-container">
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Chi phí vé nén</p>
+                <p class="text-lg font-bold text-emerald-400 font-mono mt-0.5" id="wheel-cost">60,000 VNĐ</p>
+                <p class="text-[10px] text-slate-500" id="wheel-ticket-count">Gồm 6 vé 6 số</p>
+            </div>
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Giá vé bao gốc</p>
+                <p class="text-lg font-bold text-rose-400 font-mono mt-0.5 line-through" id="wheel-full-cost">9,240,000 VNĐ</p>
+                <p class="text-[10px] text-slate-500">Nếu mua Bao 12 gốc</p>
+            </div>
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Số tiền tiết kiệm</p>
+                <p class="text-lg font-bold text-amber-300 font-mono mt-0.5" id="wheel-savings">9,180,000 VNĐ</p>
+                <p class="text-[10px] text-emerald-400 font-bold" id="wheel-savings-pct">Tiết kiệm 99.3% chi phí</p>
+            </div>
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Độ che phủ tổ hợp</p>
+                <p class="text-lg font-bold text-indigo-300 font-mono mt-0.5" id="wheel-coverage">51.4%</p>
+                <p class="text-[10px] text-slate-400">Tổ hợp 3 bóng trúng</p>
+            </div>
+        </div>
+
+        <!-- Dàn bóng số gốc được chọn -->
+        <div class="bg-slate-800/60 p-3.5 rounded-lg border border-slate-700 space-y-2">
+            <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-slate-300">🎯 Tập hợp <span id="wheel-pool-size">12</span> quả bóng cốt lõi được chọn lọc từ Model Score:</span>
+                <span class="text-slate-400 text-[11px]" id="wheel-guarantee-desc">Bảo đảm trúng giải phụ tối đa</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5 justify-center py-2 bg-slate-900/60 rounded-lg p-2" id="wheel-pool-container">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- Danh sách các vé 6 số sau khi nén -->
+        <div class="space-y-2">
+            <h4 class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                <span>🎟️</span> Danh sách các vé 6 số cần mua theo ma trận:
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="wheel-tickets-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- KHU VỰC 3: DÀN VÉ BAO TRUYỀN THỐNG -->
+    <div id="section-combo-bao" class="hidden space-y-4">
+        <!-- Bộ chọn loại Bao -->
+        <div class="bg-slate-900/60 p-3.5 rounded-lg border border-slate-700/70 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold text-slate-300">Chọn loại Bao:</span>
+                <div class="flex flex-wrap gap-1.5" id="bao-type-selector">
+                    <button onclick="selectBaoType(5)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="5">Bao 5</button>
+                    <button onclick="selectBaoType(7)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-indigo-600 text-white shadow" data-bao="7">Bao 7</button>
+                    <button onclick="selectBaoType(8)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="8">Bao 8</button>
+                    <button onclick="selectBaoType(9)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="9">Bao 9</button>
+                    <button onclick="selectBaoType(10)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="10">Bao 10</button>
+                    <button onclick="selectBaoType(12)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="12">Bao 12</button>
+                    <button onclick="selectBaoType(15)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="15">Bao 15</button>
+                    <button onclick="selectBaoType(18)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="18">Bao 18</button>
+                </div>
+            </div>
+
+            <!-- Tóm tắt chi phí vé bao -->
+            <div class="flex items-center gap-3 text-xs">
+                <div class="bg-slate-800 px-3 py-1.5 rounded border border-slate-700 text-slate-300">
+                    Quy đổi: <span id="bao-ticket-count" class="text-amber-400 font-bold font-mono">7</span> vé
+                </div>
+                <div class="bg-slate-800 px-3 py-1.5 rounded border border-slate-700 text-slate-300">
+                    Chi phí: <span id="bao-cost-value" class="text-emerald-400 font-bold font-mono">70,000</span> VNĐ
+                </div>
+            </div>
+        </div>
+
+        <!-- Danh sách các dàn bao được đề xuất -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="bao-combinations-grid">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- KHU VỰC 4: TỰ CHỌN DÀN SỐ & TỐI ƯU HÓA QUA 17 CÔNG THỨC -->
+    <div id="section-combo-custom" class="hidden space-y-4">
+        <!-- Banner giải thích -->
+        <div class="bg-indigo-950/40 border border-indigo-600/70 rounded-lg p-3.5 text-xs text-indigo-200 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-sm text-indigo-300">
+                <span>🛠️</span> Công Cụ Tự Chọn Dàn Số & Lọc Vé Đạt Chuẩn 17 Công Thức
+            </div>
+            <p class="text-indigo-300/90 leading-relaxed text-[11px]">
+                Nhập hoặc nhấp chọn các con số bạn thích (từ 7 đến 20 số). Hệ thống sẽ tự động quét qua toàn bộ các tổ hợp 6 số, áp dụng <strong>17 công thức xác suất</strong> (Gaussian, Poisson, Chẵn/Lẻ, Delta, Bayesian...) để chọn lọc ra <strong>những vé đạt điểm số cao nhất</strong> và nén vé tiết kiệm chi phí!
+            </p>
+        </div>
+
+        <!-- Khung nhập số và tùy chọn -->
+        <div class="bg-slate-900/70 p-4 rounded-xl border border-slate-700 space-y-3">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                <div class="space-y-1 flex-1 w-full">
+                    <label class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                        <span>🔢</span> Nhập dàn số yêu thích (cách nhau bởi dấu cách hoặc phẩy):
+                    </label>
+                    <div class="flex gap-2">
+                        <input type="text" id="custom-pool-input" placeholder="Ví dụ: 3 6 11 19 20 23 24 26 30 43 48 52" value="3 6 11 19 20 23 24 26 30 43 48 52" class="flex-1 bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-indigo-500 focus:outline-none">
+                        <button onclick="applyCustomInputToGrid()" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-2 rounded-lg font-medium border border-slate-600 transition">
+                            Cập nhật
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-slate-400">Số lượng vé muốn lọc:</label>
+                        <select id="custom-ticket-count" class="bg-slate-800 border border-slate-600 text-white text-xs rounded-lg px-3 py-2 focus:border-indigo-500 focus:outline-none font-bold">
+                            <option value="6">6 Vé (60.000đ)</option>
+                            <option value="8">8 Vé (80.000đ)</option>
+                            <option value="10" selected>10 Vé (100.000đ)</option>
+                            <option value="12">12 Vé (120.000đ)</option>
+                            <option value="15">15 Vé (150.000đ)</option>
+                        </select>
+                    </div>
+
+                    <div class="pt-5">
+                        <button onclick="runCustomOptimizer()" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs md:text-sm font-bold px-4 py-2 rounded-lg shadow-lg transition flex items-center gap-2">
+                            <span>🚀</span> Tối Ưu Hóa Vé
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bảng bấm số tương tác nhanh -->
+            <div class="border-t border-slate-800 pt-3 space-y-2">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-400">
+                    <span>Nhấp trực tiếp để chọn / bỏ chọn con số (<strong id="custom-selected-count" class="text-emerald-400">12</strong> số đã chọn):</span>
+                    <div class="flex flex-wrap gap-1.5 items-center">
+                        <span class="text-[10px] text-slate-500 font-semibold uppercase">Dàn mẫu thông minh:</span>
+                        <button type="button" onclick="setCustomPreset('hot')" class="text-[11px] text-amber-300 hover:text-white font-medium bg-amber-950/50 hover:bg-amber-900 border border-amber-700/60 px-2 py-0.5 rounded transition">🔥 Top Nóng</button>
+                        <button type="button" onclick="setCustomPreset('balanced')" class="text-[11px] text-emerald-300 hover:text-white font-medium bg-emerald-950/50 hover:bg-emerald-900 border border-emerald-700/60 px-2 py-0.5 rounded transition">⚖️ Cân Bằng</button>
+                        <button type="button" onclick="setCustomPreset('cold_outbreak')" class="text-[11px] text-cyan-300 hover:text-white font-medium bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-700/60 px-2 py-0.5 rounded transition" title="Mô phỏng kỳ nổ số gan lệch chuẩn như 04/10/2026">❄️ Săn Số Gan (Dị Biệt)</button>
+                        <button type="button" onclick="setCustomPreset('low_comp')" class="text-[11px] text-blue-300 hover:text-white font-medium bg-blue-950/50 hover:bg-blue-900 border border-blue-700/60 px-2 py-0.5 rounded transition" title="Bắt các kỳ nén dải số thấp không có hàng cao như #1400">🔵 Nén Dải Thấp</button>
+                        <span class="text-slate-600">|</span>
+                        <button type="button" onclick="clearCustomSelection()" class="text-[11px] text-rose-400 hover:text-rose-300 hover:underline">Xóa tất cả</button>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-1 max-h-36 overflow-y-auto p-1 bg-slate-950/40 rounded-lg border border-slate-800" id="custom-balls-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- THẺ KHUYẾN NGHỊ THÔNG MINH: NÊN CHƠI 6/45 HAY 6/55 -->
+        <div id="custom-suitability-card" class="bg-slate-900/90 border border-slate-700 rounded-xl p-4 space-y-3 shadow-lg">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-slate-800 pb-2.5">
+                <div class="flex items-center gap-2">
+                    <span class="text-xl" id="suitability-icon">⚖️</span>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Khuyến Nghị Thuật Toán: Nên Chơi Loại Nào?</h4>
+                        <p class="text-sm font-black text-white" id="suitability-verdict">Đang phân tích độ tương thích...</p>
+                    </div>
+                </div>
+                <div id="suitability-switch-container">
+                    <!-- Button to switch lottery type if needed -->
+                </div>
+            </div>
+
+            <!-- Thanh đo độ phù hợp song song -->
+            <div class="space-y-1.5">
+                <div class="flex justify-between text-xs font-bold">
+                    <span class="text-blue-400 flex items-center gap-1">Mega 6/45: <strong id="suitability-mega-pct" class="font-mono text-sm">--%</strong></span>
+                    <span class="text-purple-400 flex items-center gap-1">Power 6/55: <strong id="suitability-power-pct" class="font-mono text-sm">--%</strong></span>
+                </div>
+                <div class="w-full h-3 bg-slate-800 rounded-full overflow-hidden flex">
+                    <div id="suitability-mega-bar" class="h-full bg-gradient-to-r from-blue-600 to-cyan-500 transition-all duration-500" style="width: 50%;"></div>
+                    <div id="suitability-power-bar" class="h-full bg-gradient-to-r from-purple-500 to-indigo-600 transition-all duration-500" style="width: 50%;"></div>
+                </div>
+            </div>
+
+            <!-- Danh sách lý do toán học -->
+            <div class="bg-slate-950/50 rounded-lg p-2.5 border border-slate-800/80">
+                <p class="text-[11px] font-semibold text-slate-400 mb-1 flex items-center gap-1">
+                    <span>📐</span> Căn cứ phân tích xác suất & cấu trúc dãy số:
+                </p>
+                <ul class="text-[11px] text-slate-300 space-y-1 pl-4 list-disc" id="suitability-reasons-list">
+                    <li>Nhập dàn số để xem phân tích so sánh chi tiết giữa 6/45 và 6/55.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Thống kê nén vé và chi phí -->
+        <div id="custom-stats-container" class="hidden grid grid-cols-1 md:grid-cols-4 gap-3">
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Chi phí vé nén</p>
+                <p class="text-lg font-bold text-emerald-400 font-mono mt-0.5" id="custom-cost">100,000 VNĐ</p>
+                <p class="text-[10px] text-slate-500" id="custom-ticket-label">Gồm đúng 10 vé</p>
+            </div>
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Giá vé bao gốc</p>
+                <p class="text-lg font-bold text-rose-400 font-mono mt-0.5 line-through" id="custom-full-cost">9,240,000 VNĐ</p>
+                <p class="text-[10px] text-slate-500" id="custom-total-combos">Từ 924 tổ hợp</p>
+            </div>
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Số tiền tiết kiệm</p>
+                <p class="text-lg font-bold text-amber-300 font-mono mt-0.5" id="custom-savings">9,140,000 VNĐ</p>
+                <p class="text-[10px] text-emerald-400 font-bold" id="custom-savings-pct">Tiết kiệm 98.9% chi phí</p>
+            </div>
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Độ che phủ tổ hợp</p>
+                <p class="text-lg font-bold text-indigo-300 font-mono mt-0.5" id="custom-coverage">65.2%</p>
+                <p class="text-[10px] text-slate-400">Tổ hợp 3 bóng trúng</p>
+            </div>
+        </div>
+
+        <!-- Danh sách các vé sau khi tối ưu hóa -->
+        <div id="custom-results-area" class="space-y-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-300">
+                <span class="flex items-center gap-1.5">
+                    <span>🎟️</span> Danh sách các vé tối ưu được chấm điểm cao nhất:
+                </span>
+                <button onclick="copyAllCustomTickets()" id="btn-copy-custom-all" class="hidden text-xs bg-indigo-700 hover:bg-indigo-600 text-white font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1">
+                    📋 Sao chép toàn bộ vé
+                </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="custom-tickets-grid">
+                <div class="col-span-full py-8 text-center text-slate-500 text-xs">
+                    Nhập dàn số và nhấn "🚀 Tối Ưu Hóa Vé" để lọc ra các dãy số đẹp nhất qua 17 công thức.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

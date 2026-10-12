@@ -1,0 +1,107 @@
+<div id="regime-forecast-card" class="space-y-4">
+    <!-- Header Thông tin nhịp dự báo -->
+    <div class="bg-gradient-to-r from-indigo-900/40 via-purple-900/40 to-slate-800 p-4 rounded-xl border border-indigo-500/30">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-3">
+            <div>
+                <span class="text-xs uppercase tracking-wider font-bold text-indigo-400" data-i18n="regime_algo_tag">Thuật Toán 21: Phân Phối Cực Trị & Markov Regime</span>
+                <h3 class="text-lg font-bold text-white flex items-center gap-2 mt-0.5">
+                    <span>🎯</span> <span data-i18n="regime_header_title">Dự Báo Nhịp Dải & Trạng Thái Kỳ Tiếp Theo</span>
+                </h3>
+            </div>
+            <div id="regime-predicted-badge" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-400/40 flex items-center gap-1.5 shadow">
+                <span data-i18n="regime_expected_label">Trạng thái dự kiến:</span>
+                <span id="regime-predicted-name" class="text-white font-extrabold uppercase font-mono">--</span>
+            </div>
+        </div>
+
+        <p class="text-xs text-slate-300 mb-4" id="regime-summary-desc" data-i18n="regime_summary_desc">
+            Dựa trên Thống kê Thứ tự Cực trị $X_{(1)}$ & $X_{(6)}$, Phân phối Siêu bội và Ma trận Chuyển dịch Markov 100 kỳ quay.
+        </p>
+
+        <!-- 3 Cột Xác suất Trạng Thái -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4" id="regime-prob-bars">
+            <!-- Cột Low Compression -->
+            <div class="bg-slate-900/70 p-3 rounded-lg border border-slate-700/60 relative overflow-hidden">
+                <div class="flex justify-between items-center text-xs mb-1">
+                    <span class="font-bold text-blue-400" data-i18n="regime_col_low">🔵 Nén Dải Thấp (Rút thấp)</span>
+                    <span id="regime-prob-low" class="font-mono font-bold text-white">--%</span>
+                </div>
+                <div class="text-[11px] text-slate-400 mb-2" id="regime-range-low">Max bóng &le; 40</div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div id="regime-bar-low" class="bg-gradient-to-r from-blue-600 to-cyan-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Cột Standard Bell -->
+            <div class="bg-slate-900/70 p-3 rounded-lg border border-slate-700/60 relative overflow-hidden">
+                <div class="flex justify-between items-center text-xs mb-1">
+                    <span class="font-bold text-emerald-400" data-i18n="regime_col_std">🟢 Cân Bằng Chuẩn (Gauss)</span>
+                    <span id="regime-prob-std" class="font-mono font-bold text-white">--%</span>
+                </div>
+                <div class="text-[11px] text-slate-400 mb-2" id="regime-range-std">Max bóng 41 - 50</div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div id="regime-bar-std" class="bg-gradient-to-r from-emerald-600 to-teal-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Cột High Extreme -->
+            <div class="bg-slate-900/70 p-3 rounded-lg border border-slate-700/60 relative overflow-hidden">
+                <div class="flex justify-between items-center text-xs mb-1">
+                    <span class="font-bold text-purple-400" data-i18n="regime_col_high">🟣 Bung Dải Cao (Cực đại)</span>
+                    <span id="regime-prob-high" class="font-mono font-bold text-white">--%</span>
+                </div>
+                <div class="text-[11px] text-slate-400 mb-2" id="regime-range-high">Max bóng &ge; 51</div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div id="regime-bar-high" class="bg-gradient-to-r from-purple-600 to-pink-500 h-full rounded-full transition-all duration-700" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 Hộp Tham số dự kiến: Min, Max, Sum -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/50 flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-sm">
+                    X₁
+                </div>
+                <div>
+                    <div class="text-[11px] text-slate-400" data-i18n="regime_box_min">Bóng nhỏ nhất (Min)</div>
+                    <div id="regime-exp-min" class="text-sm font-bold text-white font-mono">--</div>
+                </div>
+            </div>
+
+            <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/50 flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm">
+                    X₆
+                </div>
+                <div>
+                    <div class="text-[11px] text-slate-400" data-i18n="regime_box_max">Bóng lớn nhất (Max)</div>
+                    <div id="regime-exp-max" class="text-sm font-bold text-white font-mono">--</div>
+                </div>
+            </div>
+
+            <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/50 flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm">
+                    &Sigma;
+                </div>
+                <div>
+                    <div class="text-[11px] text-slate-400" data-i18n="regime_box_sum">Vùng Tổng Điểm (Sum)</div>
+                    <div id="regime-exp-sum" class="text-sm font-bold text-amber-300 font-mono">--</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hộp Lực Hút Hồi Quy Về Trung Bình (Mean Reversion Oscillator) -->
+    <div class="bg-slate-900/50 border border-slate-800 p-3.5 rounded-xl flex items-start gap-3">
+        <div class="text-2xl mt-0.5" id="reversion-icon">🧲</div>
+        <div class="flex-1 text-xs">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="font-bold text-white" data-i18n="regime_rev_title">Chỉ Số Hồi Quy Trung Bình (Mean Reversion):</span>
+                <span id="reversion-badge" class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-slate-800 text-slate-300 border border-slate-700">--</span>
+            </div>
+            <p id="reversion-desc" class="text-slate-300 leading-relaxed" data-i18n="regime_rev_desc">
+                Đang phân tích dao động tổng điểm và dải cực đại qua 3 kỳ gần nhất...
+            </p>
+        </div>
+    </div>
+</div>

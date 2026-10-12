@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Vietlott Analytics & Prediction</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- HTMX (if needed later) -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+        body {
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 min-h-screen">
+    <nav class="bg-slate-800 border-b border-slate-700 p-4 sticky top-0 z-40 backdrop-blur-md bg-slate-800/95 shadow-md">
+        <div class="container mx-auto flex flex-wrap justify-between items-center gap-3">
+            <h1 class="text-xl md:text-2xl font-bold text-white flex items-center gap-2">
+                <span class="text-2xl md:text-3xl">🎱</span> Vietlott Analytics
+            </h1>
+            <div class="flex items-center gap-2 md:gap-3">
+                <!-- Nút mở 21 công thức tiếng Anh -->
+                <button onclick="openFormulasModal()" class="bg-indigo-600/80 hover:bg-indigo-600 text-white text-xs md:text-sm px-3 py-2 rounded-lg font-semibold transition flex items-center gap-1.5 border border-indigo-500/50 shadow-sm">
+                    <span>📐</span>
+                    <span data-i18n="nav_formulas">21 Mathematical Formulas (EN)</span>
+                </button>
+
+                <!-- Lựa chọn ngôn ngữ Tiếng Việt / English -->
+                <div class="flex items-center bg-slate-900/90 rounded-lg p-1 border border-slate-700">
+                    <button id="lang-btn-vi" onclick="setLanguage('vi')" class="px-2.5 py-1 text-xs font-bold rounded transition bg-blue-600 text-white shadow">
+                        🇻🇳 VN
+                    </button>
+                    <button id="lang-btn-en" onclick="setLanguage('en')" class="px-2.5 py-1 text-xs font-bold rounded transition text-slate-400 hover:text-white">
+                        🇬🇧 EN
+                    </button>
+                </div>
+
+                <!-- Nút Đổi IP Server Backend -->
+                <button onclick="promptChangeServer()" title="Cài đặt địa chỉ máy chủ Server" class="bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs md:text-sm px-2.5 py-2 rounded-lg font-semibold transition flex items-center gap-1 border border-slate-600 shadow-sm">
+                    <span>⚙️</span>
+                </button>
+
+                <!-- Nút Làm mới dữ liệu -->
+                <button onclick="fetchData()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs md:text-sm px-3 md:px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-1">
+                    <span>🔄</span>
+                    <span data-i18n="nav_refresh">Làm mới dữ liệu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 py-8">
+        
+<div class="flex flex-col gap-6">
+    <!-- Info bar & Tabs -->
+    <div class="flex flex-col md:flex-row justify-between items-center bg-slate-800 p-4 rounded-lg">
+        <div class="flex gap-2 mb-4 md:mb-0">
+            <button id="tab-MEGA_645" onclick="switchLottery('MEGA_645')" class="lottery-tab bg-blue-600 text-white px-6 py-2 rounded-lg font-bold transition-colors">MEGA 6/45</button>
+            <button id="tab-POWER_655" onclick="switchLottery('POWER_655')" class="lottery-tab bg-slate-700 text-gray-300 hover:bg-slate-600 px-6 py-2 rounded-lg font-bold transition-colors">POWER 6/55</button>
+        </div>
+        <div class="text-sm text-slate-400 flex gap-4">
+            <div><span data-i18n="total_draws_label">Tổng số kỳ quay:</span> <span id="total-draws" class="text-white font-mono">0</span></div>
+            <div><span data-i18n="last_updated_label">Cập nhật lần cuối:</span> <span id="last-fetch" class="text-white font-mono">--</span></div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Left Column: Draws & Stats -->
+        <div class="lg:col-span-1 space-y-6">
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>📋</span> <span data-i18n="sec_draw_history">Lịch Sử Quay Thưởng</span>
+                    </h2>
+                </div>
+                <div class="p-4" id="draws-table">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>🔥</span> <span data-i18n="sec_hot_cold">Hot & Cold Numbers</span>
+                    </h2>
+                </div>
+                <div class="p-4" id="hot-cold-content">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Charts & Predictions -->
+        <div class="lg:col-span-2 space-y-6">
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>📊</span> <span data-i18n="sec_frequency">Tần Suất Xuất Hiện</span>
+                    </h2>
+                </div>
+                <div class="p-4 h-64">
+                    <canvas id="frequency-canvas"></canvas>
+                </div>
+            </div>
+
+            <!-- Dự Báo Nhịp Dải & Trạng Thái Cực Trị -->
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="p-4">
+                    <div id="regime-forecast-card" class="space-y-4">
+    <!-- Header Thông tin nhịp dự báo -->
+    <div class="bg-gradient-to-r from-indigo-900/40 via-purple-900/40 to-slate-800 p-4 rounded-xl border border-indigo-500/30">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-3">
+            <div>
+                <span class="text-xs uppercase tracking-wider font-bold text-indigo-400" data-i18n="regime_algo_tag">Thuật Toán 21: Phân Phối Cực Trị & Markov Regime</span>
+                <h3 class="text-lg font-bold text-white flex items-center gap-2 mt-0.5">
+                    <span>🎯</span> <span data-i18n="regime_header_title">Dự Báo Nhịp Dải & Trạng Thái Kỳ Tiếp Theo</span>
+                </h3>
+            </div>
+            <div id="regime-predicted-badge" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-400/40 flex items-center gap-1.5 shadow">
+                <span data-i18n="regime_expected_label">Trạng thái dự kiến:</span>
+                <span id="regime-predicted-name" class="text-white font-extrabold uppercase font-mono">--</span>
+            </div>
+        </div>
+
+        <p class="text-xs text-slate-300 mb-4" id="regime-summary-desc" data-i18n="regime_summary_desc">
+            Dựa trên Thống kê Thứ tự Cực trị $X_{(1)}$ & $X_{(6)}$, Phân phối Siêu bội và Ma trận Chuyển dịch Markov 100 kỳ quay.
+        </p>
+
+        <!-- 3 Cột Xác suất Trạng Thái -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4" id="regime-prob-bars">
+            <!-- Cột Low Compression -->
+            <div class="bg-slate-900/70 p-3 rounded-lg border border-slate-700/60 relative overflow-hidden">
+                <div class="flex justify-between items-center text-xs mb-1">
+                    <span class="font-bold text-blue-400" data-i18n="regime_col_low">🔵 Nén Dải Thấp (Rút thấp)</span>
+                    <span id="regime-prob-low" class="font-mono font-bold text-white">--%</span>
+                </div>
+                <div class="text-[11px] text-slate-400 mb-2" id="regime-range-low">Max bóng &le; 40</div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div id="regime-bar-low" class="bg-gradient-to-r from-blue-600 to-cyan-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Cột Standard Bell -->
+            <div class="bg-slate-900/70 p-3 rounded-lg border border-slate-700/60 relative overflow-hidden">
+                <div class="flex justify-between items-center text-xs mb-1">
+                    <span class="font-bold text-emerald-400" data-i18n="regime_col_std">🟢 Cân Bằng Chuẩn (Gauss)</span>
+                    <span id="regime-prob-std" class="font-mono font-bold text-white">--%</span>
+                </div>
+                <div class="text-[11px] text-slate-400 mb-2" id="regime-range-std">Max bóng 41 - 50</div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div id="regime-bar-std" class="bg-gradient-to-r from-emerald-600 to-teal-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Cột High Extreme -->
+            <div class="bg-slate-900/70 p-3 rounded-lg border border-slate-700/60 relative overflow-hidden">
+                <div class="flex justify-between items-center text-xs mb-1">
+                    <span class="font-bold text-purple-400" data-i18n="regime_col_high">🟣 Bung Dải Cao (Cực đại)</span>
+                    <span id="regime-prob-high" class="font-mono font-bold text-white">--%</span>
+                </div>
+                <div class="text-[11px] text-slate-400 mb-2" id="regime-range-high">Max bóng &ge; 51</div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div id="regime-bar-high" class="bg-gradient-to-r from-purple-600 to-pink-500 h-full rounded-full transition-all duration-700" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 Hộp Tham số dự kiến: Min, Max, Sum -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/50 flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-sm">
+                    X₁
+                </div>
+                <div>
+                    <div class="text-[11px] text-slate-400" data-i18n="regime_box_min">Bóng nhỏ nhất (Min)</div>
+                    <div id="regime-exp-min" class="text-sm font-bold text-white font-mono">--</div>
+                </div>
+            </div>
+
+            <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/50 flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm">
+                    X₆
+                </div>
+                <div>
+                    <div class="text-[11px] text-slate-400" data-i18n="regime_box_max">Bóng lớn nhất (Max)</div>
+                    <div id="regime-exp-max" class="text-sm font-bold text-white font-mono">--</div>
+                </div>
+            </div>
+
+            <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/50 flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm">
+                    &Sigma;
+                </div>
+                <div>
+                    <div class="text-[11px] text-slate-400" data-i18n="regime_box_sum">Vùng Tổng Điểm (Sum)</div>
+                    <div id="regime-exp-sum" class="text-sm font-bold text-amber-300 font-mono">--</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hộp Lực Hút Hồi Quy Về Trung Bình (Mean Reversion Oscillator) -->
+    <div class="bg-slate-900/50 border border-slate-800 p-3.5 rounded-xl flex items-start gap-3">
+        <div class="text-2xl mt-0.5" id="reversion-icon">🧲</div>
+        <div class="flex-1 text-xs">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="font-bold text-white" data-i18n="regime_rev_title">Chỉ Số Hồi Quy Trung Bình (Mean Reversion):</span>
+                <span id="reversion-badge" class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-slate-800 text-slate-300 border border-slate-700">--</span>
+            </div>
+            <p id="reversion-desc" class="text-slate-300 leading-relaxed" data-i18n="regime_rev_desc">
+                Đang phân tích dao động tổng điểm và dải cực đại qua 3 kỳ gần nhất...
+            </p>
+        </div>
+    </div>
+</div>
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700 flex justify-between items-center">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>🤖</span> <span data-i18n="sec_predictions">Bảng Điểm Mô Hình (Predictions)</span>
+                    </h2>
+                    <div class="flex items-center gap-2 text-sm">
+                        <label for="threshold" class="text-slate-400" data-i18n="filter_model_score">Lọc Model Score &ge;</label>
+                        <input type="range" id="threshold" min="0" max="100" value="50" oninput="updateThreshold(this.value)" onchange="updateThreshold(this.value)" class="w-24 accent-blue-500">
+                        <span id="threshold-value" class="text-white font-mono w-6">50</span>
+                    </div>
+                </div>
+                <div class="p-4" id="predictions-table">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>🎲</span> <span data-i18n="sec_combinations">Gợi Ý Bộ Số (Combinations)</span>
+                    </h2>
+                </div>
+                <div class="p-4">
+                    <div class="space-y-6">
+    <!-- Sub-tabs: 15 Dãy Tuyển Chọn vs Ma Trận Wheeling vs Dàn Vé Bao -->
+    <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+        <div class="flex flex-wrap gap-2">
+            <button id="btn-combo-standard" onclick="switchComboMode('standard')" class="combo-mode-btn bg-blue-600 text-white text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5">
+                <span>🎯</span> <span data-i18n="tab_standard_combos">15 Dãy Tuyển Chọn</span>
+            </button>
+            <button id="btn-combo-wheeling" onclick="switchComboMode('wheeling')" class="combo-mode-btn bg-slate-700 hover:bg-slate-600 text-gray-300 text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5">
+                <span>⚡</span> <span data-i18n="tab_wheeling_matrix">Ma Trận Wheeling (Tiết Kiệm 99%)</span>
+                <span class="bg-emerald-500 text-slate-900 text-[10px] px-1.5 py-0.5 rounded-full font-black uppercase tracking-wider">HOT</span>
+            </button>
+            <button id="btn-combo-bao" onclick="switchComboMode('bao')" class="combo-mode-btn bg-slate-700 hover:bg-slate-600 text-gray-300 text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5">
+                <span>💎</span> <span data-i18n="tab_bao_combos">Dàn Số Bao (Bao 5 - 18)</span>
+            </button>
+            <button id="btn-combo-custom" onclick="switchComboMode('custom')" class="combo-mode-btn bg-slate-700 hover:bg-slate-600 text-gray-300 text-xs md:text-sm px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5">
+                <span>🛠️</span> <span data-i18n="tab_custom_pool">Dàn Số Tự Chọn (Custom)</span>
+                <span class="bg-indigo-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-black uppercase tracking-wider">NEW</span>
+            </button>
+        </div>
+        <button onclick="refreshCurrentCombo()" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-1.5 rounded border border-slate-600 transition flex items-center gap-1">
+            <span>🔄</span> <span data-i18n="btn_recalc_combos">Sinh lại bộ số</span>
+        </button>
+    </div>
+
+    <!-- KHU VỰC 1: 15 DÃY SỐ SIÊU TUYỂN CHỌN -->
+    <div id="section-combo-standard" class="space-y-4">
+        <div class="bg-indigo-950/40 border border-indigo-700/60 rounded-lg p-3 text-xs text-indigo-200 flex items-start gap-2.5">
+            <span class="text-base">🧬</span>
+            <div class="space-y-0.5">
+                <strong data-i18n="combos_banner_title">15 Dãy số siêu tuyển chọn (Bao quát toàn diện 5 chiến lược & 21 công thức toán học):</strong>
+                <p class="text-indigo-300 text-[11px]" data-i18n="combos_banner_desc">
+                    Bao gồm: 🏆 <strong>Tối Ưu Phong Độ</strong> (Hot Elite), ⚖️ <strong>Cân Bằng Chu Kỳ</strong> (Rebound), ❄️ <strong>Săn Số Gan & Dị Biệt</strong> (Cold Outbreak - ngừa các kỳ lệch dải cao như 04/10), 🔵 <strong>Nén Dải Thấp</strong> (Low Compression - ngừa các kỳ rút thấp như #1400), và 🌊 <strong>Bước Nhảy Delta</strong> (Spread).
+                </p>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="combinations-grid">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- KHU VỰC 2: MA TRẬN WHEELING SYSTEM (MỚI) -->
+    <div id="section-combo-wheeling" class="hidden space-y-4">
+        <!-- Banner giải thích Wheeling System -->
+        <div class="bg-emerald-950/40 border border-emerald-600/70 rounded-lg p-3.5 text-xs text-emerald-200 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-sm text-emerald-300">
+                <span>⚡</span> Chiến Lược Ma Trận Che Phủ (Lottery Wheeling System)
+            </div>
+            <p class="text-emerald-300/90 leading-relaxed text-[11px]">
+                Thay vì phải chi tiền triệu để mua vé bao đầy đủ, thuật toán Ma trận che phủ toán học (Covering Design) sẽ chọn ra tập hợp 10 – 14 con số xuất sắc nhất rồi <strong>nén lại thành đúng 4 – 8 vé (chỉ từ 40k – 80k VNĐ)</strong> mà vẫn <strong>bảo toàn độ bao phủ tối đa</strong> và bảo đảm trúng giải phụ!
+            </p>
+        </div>
+
+        <!-- Bộ chọn gói Wheeling & Chiến lược -->
+        <div class="bg-slate-900/60 p-3.5 rounded-lg border border-slate-700/70 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-semibold text-slate-300">Gói số lượng:</span>
+                    <div class="flex gap-2" id="wheel-size-selector">
+                        <button onclick="selectWheelSize(10)" class="wheel-btn px-3 py-1.5 text-xs rounded-lg font-bold bg-slate-700 text-slate-300 hover:bg-slate-600 transition" data-wheel="10">
+                            Wheel 10 Số (4 Vé · 40k)
+                        </button>
+                        <button onclick="selectWheelSize(12)" class="wheel-btn px-3 py-1.5 text-xs rounded-lg font-bold bg-emerald-600 text-white shadow transition flex items-center gap-1" data-wheel="12">
+                            ⭐ Wheel 12 Số (6 Vé · 60k)
+                        </button>
+                        <button onclick="selectWheelSize(14)" class="wheel-btn px-3 py-1.5 text-xs rounded-lg font-bold bg-slate-700 text-slate-300 hover:bg-slate-600 transition" data-wheel="14">
+                            Wheel 14 Số (8 Vé · 80k)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Nút sao chép toàn bộ vé trong gói wheeling -->
+                <button onclick="copyAllWheelTickets()" class="text-xs bg-emerald-700 hover:bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1">
+                    📋 Sao chép toàn bộ vé
+                </button>
+            </div>
+
+            <!-- Chiến lược dàn bóng cốt lõi Wheeling -->
+            <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800 text-xs">
+                <span class="text-slate-400 font-semibold">Chiến lược dàn số gốc:</span>
+                <div class="flex flex-wrap gap-1.5" id="wheel-strat-selector">
+                    <button onclick="selectWheelStrategy('balanced')" class="wheel-strat-btn px-2.5 py-1 text-xs rounded font-bold bg-emerald-600 text-white shadow transition flex items-center gap-1" data-strat="balanced">
+                        ⚖️ Cân Bằng Chuẩn
+                    </button>
+                    <button onclick="selectWheelStrategy('cold_outbreak')" class="wheel-strat-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600 transition flex items-center gap-1" data-strat="cold_outbreak" title="Đón đợt nổ xả gan dị biệt">
+                        ❄️ Săn Số Gan (Dị Biệt)
+                    </button>
+                    <button onclick="selectWheelStrategy('low_comp')" class="wheel-strat-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600 transition flex items-center gap-1" data-strat="low_comp" title="Ép dàn bóng <= 40 cho kỳ rút thấp">
+                        🔵 Nén Dải Thấp (Rút Thấp)
+                    </button>
+                    <button onclick="selectWheelStrategy('elite')" class="wheel-strat-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600 transition flex items-center gap-1" data-strat="elite">
+                        🔥 Thuần Phong Độ
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thống kê so sánh hiệu quả chi phí -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3" id="wheel-stats-container">
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Chi phí vé nén</p>
+                <p class="text-lg font-bold text-emerald-400 font-mono mt-0.5" id="wheel-cost">60,000 VNĐ</p>
+                <p class="text-[10px] text-slate-500" id="wheel-ticket-count">Gồm 6 vé 6 số</p>
+            </div>
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Giá vé bao gốc</p>
+                <p class="text-lg font-bold text-rose-400 font-mono mt-0.5 line-through" id="wheel-full-cost">9,240,000 VNĐ</p>
+                <p class="text-[10px] text-slate-500">Nếu mua Bao 12 gốc</p>
+            </div>
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Số tiền tiết kiệm</p>
+                <p class="text-lg font-bold text-amber-300 font-mono mt-0.5" id="wheel-savings">9,180,000 VNĐ</p>
+                <p class="text-[10px] text-emerald-400 font-bold" id="wheel-savings-pct">Tiết kiệm 99.3% chi phí</p>
+            </div>
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Độ che phủ tổ hợp</p>
+                <p class="text-lg font-bold text-indigo-300 font-mono mt-0.5" id="wheel-coverage">51.4%</p>
+                <p class="text-[10px] text-slate-400">Tổ hợp 3 bóng trúng</p>
+            </div>
+        </div>
+
+        <!-- Dàn bóng số gốc được chọn -->
+        <div class="bg-slate-800/60 p-3.5 rounded-lg border border-slate-700 space-y-2">
+            <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-slate-300">🎯 Tập hợp <span id="wheel-pool-size">12</span> quả bóng cốt lõi được chọn lọc từ Model Score:</span>
+                <span class="text-slate-400 text-[11px]" id="wheel-guarantee-desc">Bảo đảm trúng giải phụ tối đa</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5 justify-center py-2 bg-slate-900/60 rounded-lg p-2" id="wheel-pool-container">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- Danh sách các vé 6 số sau khi nén -->
+        <div class="space-y-2">
+            <h4 class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                <span>🎟️</span> Danh sách các vé 6 số cần mua theo ma trận:
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="wheel-tickets-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- KHU VỰC 3: DÀN VÉ BAO TRUYỀN THỐNG -->
+    <div id="section-combo-bao" class="hidden space-y-4">
+        <!-- Bộ chọn loại Bao -->
+        <div class="bg-slate-900/60 p-3.5 rounded-lg border border-slate-700/70 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold text-slate-300">Chọn loại Bao:</span>
+                <div class="flex flex-wrap gap-1.5" id="bao-type-selector">
+                    <button onclick="selectBaoType(5)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="5">Bao 5</button>
+                    <button onclick="selectBaoType(7)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-indigo-600 text-white shadow" data-bao="7">Bao 7</button>
+                    <button onclick="selectBaoType(8)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="8">Bao 8</button>
+                    <button onclick="selectBaoType(9)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="9">Bao 9</button>
+                    <button onclick="selectBaoType(10)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="10">Bao 10</button>
+                    <button onclick="selectBaoType(12)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="12">Bao 12</button>
+                    <button onclick="selectBaoType(15)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="15">Bao 15</button>
+                    <button onclick="selectBaoType(18)" class="bao-btn px-2.5 py-1 text-xs rounded font-bold bg-slate-700 text-slate-300 hover:bg-slate-600" data-bao="18">Bao 18</button>
+                </div>
+            </div>
+
+            <!-- Tóm tắt chi phí vé bao -->
+            <div class="flex items-center gap-3 text-xs">
+                <div class="bg-slate-800 px-3 py-1.5 rounded border border-slate-700 text-slate-300">
+                    Quy đổi: <span id="bao-ticket-count" class="text-amber-400 font-bold font-mono">7</span> vé
+                </div>
+                <div class="bg-slate-800 px-3 py-1.5 rounded border border-slate-700 text-slate-300">
+                    Chi phí: <span id="bao-cost-value" class="text-emerald-400 font-bold font-mono">70,000</span> VNĐ
+                </div>
+            </div>
+        </div>
+
+        <!-- Danh sách các dàn bao được đề xuất -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="bao-combinations-grid">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- KHU VỰC 4: TỰ CHỌN DÀN SỐ & TỐI ƯU HÓA QUA 17 CÔNG THỨC -->
+    <div id="section-combo-custom" class="hidden space-y-4">
+        <!-- Banner giải thích -->
+        <div class="bg-indigo-950/40 border border-indigo-600/70 rounded-lg p-3.5 text-xs text-indigo-200 space-y-1.5">
+            <div class="flex items-center gap-2 font-bold text-sm text-indigo-300">
+                <span>🛠️</span> Công Cụ Tự Chọn Dàn Số & Lọc Vé Đạt Chuẩn 17 Công Thức
+            </div>
+            <p class="text-indigo-300/90 leading-relaxed text-[11px]">
+                Nhập hoặc nhấp chọn các con số bạn thích (từ 7 đến 20 số). Hệ thống sẽ tự động quét qua toàn bộ các tổ hợp 6 số, áp dụng <strong>17 công thức xác suất</strong> (Gaussian, Poisson, Chẵn/Lẻ, Delta, Bayesian...) để chọn lọc ra <strong>những vé đạt điểm số cao nhất</strong> và nén vé tiết kiệm chi phí!
+            </p>
+        </div>
+
+        <!-- Khung nhập số và tùy chọn -->
+        <div class="bg-slate-900/70 p-4 rounded-xl border border-slate-700 space-y-3">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                <div class="space-y-1 flex-1 w-full">
+                    <label class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                        <span>🔢</span> Nhập dàn số yêu thích (cách nhau bởi dấu cách hoặc phẩy):
+                    </label>
+                    <div class="flex gap-2">
+                        <input type="text" id="custom-pool-input" placeholder="Ví dụ: 3 6 11 19 20 23 24 26 30 43 48 52" value="3 6 11 19 20 23 24 26 30 43 48 52" class="flex-1 bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-indigo-500 focus:outline-none">
+                        <button onclick="applyCustomInputToGrid()" class="text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-2 rounded-lg font-medium border border-slate-600 transition">
+                            Cập nhật
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-slate-400">Số lượng vé muốn lọc:</label>
+                        <select id="custom-ticket-count" class="bg-slate-800 border border-slate-600 text-white text-xs rounded-lg px-3 py-2 focus:border-indigo-500 focus:outline-none font-bold">
+                            <option value="6">6 Vé (60.000đ)</option>
+                            <option value="8">8 Vé (80.000đ)</option>
+                            <option value="10" selected>10 Vé (100.000đ)</option>
+                            <option value="12">12 Vé (120.000đ)</option>
+                            <option value="15">15 Vé (150.000đ)</option>
+                        </select>
+                    </div>
+
+                    <div class="pt-5">
+                        <button onclick="runCustomOptimizer()" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs md:text-sm font-bold px-4 py-2 rounded-lg shadow-lg transition flex items-center gap-2">
+                            <span>🚀</span> Tối Ưu Hóa Vé
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bảng bấm số tương tác nhanh -->
+            <div class="border-t border-slate-800 pt-3 space-y-2">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-400">
+                    <span>Nhấp trực tiếp để chọn / bỏ chọn con số (<strong id="custom-selected-count" class="text-emerald-400">12</strong> số đã chọn):</span>
+                    <div class="flex flex-wrap gap-1.5 items-center">
+                        <span class="text-[10px] text-slate-500 font-semibold uppercase">Dàn mẫu thông minh:</span>
+                        <button type="button" onclick="setCustomPreset('hot')" class="text-[11px] text-amber-300 hover:text-white font-medium bg-amber-950/50 hover:bg-amber-900 border border-amber-700/60 px-2 py-0.5 rounded transition">🔥 Top Nóng</button>
+                        <button type="button" onclick="setCustomPreset('balanced')" class="text-[11px] text-emerald-300 hover:text-white font-medium bg-emerald-950/50 hover:bg-emerald-900 border border-emerald-700/60 px-2 py-0.5 rounded transition">⚖️ Cân Bằng</button>
+                        <button type="button" onclick="setCustomPreset('cold_outbreak')" class="text-[11px] text-cyan-300 hover:text-white font-medium bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-700/60 px-2 py-0.5 rounded transition" title="Mô phỏng kỳ nổ số gan lệch chuẩn như 04/10/2026">❄️ Săn Số Gan (Dị Biệt)</button>
+                        <button type="button" onclick="setCustomPreset('low_comp')" class="text-[11px] text-blue-300 hover:text-white font-medium bg-blue-950/50 hover:bg-blue-900 border border-blue-700/60 px-2 py-0.5 rounded transition" title="Bắt các kỳ nén dải số thấp không có hàng cao như #1400">🔵 Nén Dải Thấp</button>
+                        <span class="text-slate-600">|</span>
+                        <button type="button" onclick="clearCustomSelection()" class="text-[11px] text-rose-400 hover:text-rose-300 hover:underline">Xóa tất cả</button>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-1 max-h-36 overflow-y-auto p-1 bg-slate-950/40 rounded-lg border border-slate-800" id="custom-balls-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- THẺ KHUYẾN NGHỊ THÔNG MINH: NÊN CHƠI 6/45 HAY 6/55 -->
+        <div id="custom-suitability-card" class="bg-slate-900/90 border border-slate-700 rounded-xl p-4 space-y-3 shadow-lg">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-slate-800 pb-2.5">
+                <div class="flex items-center gap-2">
+                    <span class="text-xl" id="suitability-icon">⚖️</span>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Khuyến Nghị Thuật Toán: Nên Chơi Loại Nào?</h4>
+                        <p class="text-sm font-black text-white" id="suitability-verdict">Đang phân tích độ tương thích...</p>
+                    </div>
+                </div>
+                <div id="suitability-switch-container">
+                    <!-- Button to switch lottery type if needed -->
+                </div>
+            </div>
+
+            <!-- Thanh đo độ phù hợp song song -->
+            <div class="space-y-1.5">
+                <div class="flex justify-between text-xs font-bold">
+                    <span class="text-blue-400 flex items-center gap-1">Mega 6/45: <strong id="suitability-mega-pct" class="font-mono text-sm">--%</strong></span>
+                    <span class="text-purple-400 flex items-center gap-1">Power 6/55: <strong id="suitability-power-pct" class="font-mono text-sm">--%</strong></span>
+                </div>
+                <div class="w-full h-3 bg-slate-800 rounded-full overflow-hidden flex">
+                    <div id="suitability-mega-bar" class="h-full bg-gradient-to-r from-blue-600 to-cyan-500 transition-all duration-500" style="width: 50%;"></div>
+                    <div id="suitability-power-bar" class="h-full bg-gradient-to-r from-purple-500 to-indigo-600 transition-all duration-500" style="width: 50%;"></div>
+                </div>
+            </div>
+
+            <!-- Danh sách lý do toán học -->
+            <div class="bg-slate-950/50 rounded-lg p-2.5 border border-slate-800/80">
+                <p class="text-[11px] font-semibold text-slate-400 mb-1 flex items-center gap-1">
+                    <span>📐</span> Căn cứ phân tích xác suất & cấu trúc dãy số:
+                </p>
+                <ul class="text-[11px] text-slate-300 space-y-1 pl-4 list-disc" id="suitability-reasons-list">
+                    <li>Nhập dàn số để xem phân tích so sánh chi tiết giữa 6/45 và 6/55.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Thống kê nén vé và chi phí -->
+        <div id="custom-stats-container" class="hidden grid grid-cols-1 md:grid-cols-4 gap-3">
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Chi phí vé nén</p>
+                <p class="text-lg font-bold text-emerald-400 font-mono mt-0.5" id="custom-cost">100,000 VNĐ</p>
+                <p class="text-[10px] text-slate-500" id="custom-ticket-label">Gồm đúng 10 vé</p>
+            </div>
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Giá vé bao gốc</p>
+                <p class="text-lg font-bold text-rose-400 font-mono mt-0.5 line-through" id="custom-full-cost">9,240,000 VNĐ</p>
+                <p class="text-[10px] text-slate-500" id="custom-total-combos">Từ 924 tổ hợp</p>
+            </div>
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Số tiền tiết kiệm</p>
+                <p class="text-lg font-bold text-amber-300 font-mono mt-0.5" id="custom-savings">9,140,000 VNĐ</p>
+                <p class="text-[10px] text-emerald-400 font-bold" id="custom-savings-pct">Tiết kiệm 98.9% chi phí</p>
+            </div>
+            <div class="bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-center">
+                <p class="text-[11px] text-slate-400">Độ che phủ tổ hợp</p>
+                <p class="text-lg font-bold text-indigo-300 font-mono mt-0.5" id="custom-coverage">65.2%</p>
+                <p class="text-[10px] text-slate-400">Tổ hợp 3 bóng trúng</p>
+            </div>
+        </div>
+
+        <!-- Danh sách các vé sau khi tối ưu hóa -->
+        <div id="custom-results-area" class="space-y-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-300">
+                <span class="flex items-center gap-1.5">
+                    <span>🎟️</span> Danh sách các vé tối ưu được chấm điểm cao nhất:
+                </span>
+                <button onclick="copyAllCustomTickets()" id="btn-copy-custom-all" class="hidden text-xs bg-indigo-700 hover:bg-indigo-600 text-white font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1">
+                    📋 Sao chép toàn bộ vé
+                </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="custom-tickets-grid">
+                <div class="col-span-full py-8 text-center text-slate-500 text-xs">
+                    Nhập dàn số và nhấn "🚀 Tối Ưu Hóa Vé" để lọc ra các dãy số đẹp nhất qua 17 công thức.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>⚖️</span> <span data-i18n="sec_prob_comparison">Xác Suất vs Mô Hình</span>
+                    </h2>
+                </div>
+                <div class="p-4">
+                    <div class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-blue-900/30 border border-blue-500 rounded-lg p-6">
+            <h3 class="text-blue-300 font-bold text-lg mb-2">
+                <span>📐</span> <span data-i18n="prob_math_title">Xác Suất Toán Học (Mathematical Probability)</span>
+            </h3>
+            <p class="text-4xl font-bold text-blue-200" id="math-prob">--</p>
+            <p class="text-blue-400 text-sm mt-2" data-i18n="prob_math_desc">Đây là xác suất cố định theo cơ chế quay số. Mỗi số có xác suất bằng nhau trong mỗi kỳ quay.</p>
+        </div>
+        <div class="bg-purple-900/30 border border-purple-500 rounded-lg p-6">
+            <h3 class="text-purple-300 font-bold text-lg mb-2">
+                <span>🤖</span> <span data-i18n="prob_model_title">Model Score</span>
+            </h3>
+            <p class="text-4xl font-bold text-purple-200">0 - 100</p>
+            <p class="text-purple-400 text-sm mt-2" data-i18n="prob_model_desc">Đây là điểm phân tích từ nhiều phương pháp thống kê. KHÔNG PHẢI xác suất trúng thưởng thực tế.</p>
+        </div>
+    </div>
+    <div class="bg-gray-800 rounded-lg p-4">
+        <h4 class="text-gray-300 font-semibold mb-2" data-i18n="prob_diff_title">Giải thích sự khác biệt:</h4>
+        <ul class="text-gray-400 text-sm space-y-2">
+            <li>• <strong data-i18n="prob_diff_math_label">Mathematical Probability:</strong> <span data-i18n="prob_diff_math_val">Xác suất lý thuyết = số lượng số chọn / tổng số. Cố định cho mọi kỳ.</span></li>
+            <li>• <strong data-i18n="prob_diff_model_label">Model Score:</strong> <span data-i18n="prob_diff_model_val">Điểm tổng hợp từ frequency, recency, Bayesian, Monte Carlo. Thay đổi theo dữ liệu.</span></li>
+            <li>• <strong data-i18n="prob_diff_conf_label">Confidence:</strong> <span data-i18n="prob_diff_conf_val">Mức độ nhất quán giữa các phương pháp phân tích, không phải độ chắc chắn trúng thưởng.</span></li>
+        </ul>
+    </div>
+</div>
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>🧪</span> <span data-i18n="sec_backtest">Kiểm Thử Lịch Sử (Backtesting)</span>
+                    </h2>
+                </div>
+                <div class="p-4">
+                    <div class="space-y-6">
+    <div id="backtest-content">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="bg-slate-800 rounded-lg p-4 text-center">
+                <p class="text-gray-400 text-sm">Model Avg Matched</p>
+                <p class="text-3xl font-bold text-white" id="model-avg">--</p>
+            </div>
+            <div class="bg-slate-800 rounded-lg p-4 text-center">
+                <p class="text-gray-400 text-sm">Random Avg Matched</p>
+                <p class="text-3xl font-bold text-gray-400" id="random-avg">--</p>
+            </div>
+            <div class="bg-slate-800 rounded-lg p-4 text-center">
+                <p class="text-gray-400 text-sm">Verdict</p>
+                <p class="text-lg font-bold" id="verdict-text">--</p>
+            </div>
+        </div>
+        <div class="bg-red-900/30 border border-red-600 rounded-lg p-4">
+            <p class="text-red-200 text-sm" id="backtest-disclaimer">Past performance does not predict future results.</p>
+        </div>
+    </div>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </main>
+
+    <!-- Modal 21 Công Thức Tiếng Anh -->
+    <!-- Modal Chi Tiết 21 Công Thức Toán Học (Mathematical Formulas Reference) -->
+<div id="formulas-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-3 md:p-6 transition-all">
+    <div class="bg-slate-900 border border-slate-700 w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-900/60 via-indigo-900/60 to-purple-900/60 p-4 md:p-5 border-b border-slate-700/80 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl md:text-3xl">📐</span>
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                        <span>Mathematical Engine & Formulas Specification</span>
+                        <span class="text-xs bg-indigo-500/30 text-indigo-300 border border-indigo-400/30 px-2 py-0.5 rounded-full font-mono">21 Formulas</span>
+                    </h3>
+                    <p class="text-xs text-slate-300 mt-0.5">Comprehensive theoretical foundation, scoring algorithms, and statistical mechanics implemented in this platform.</p>
+                </div>
+            </div>
+            <button onclick="closeFormulasModal()" class="w-8 h-8 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-lg font-bold transition">
+                ✕
+            </button>
+        </div>
+
+        <!-- Body Scrollable -->
+        <div class="p-4 md:p-6 overflow-y-auto space-y-6 text-slate-300 text-xs md:text-sm">
+            
+            <!-- Quick Summary Disclaimer -->
+            <div class="bg-amber-950/30 border border-amber-600/60 rounded-xl p-3.5 text-xs text-amber-200/90 flex items-start gap-3">
+                <span class="text-lg mt-0.5">⚠️</span>
+                <div>
+                    <strong class="text-amber-300">Methodological Disclosure:</strong>
+                    Lottery balls drawn in Mega 6/45 and Power 6/55 are physically independent random events with uniform baseline probability \(P = 6 / N\). The formulas below quantify historical empirical trends, stochastic regime clustering, combinatorial fitness, and risk mitigation — they do not guarantee winning.
+                </div>
+            </div>
+
+            <!-- Group 1: Core Probability & Statistical Engine -->
+            <div class="space-y-3">
+                <div class="flex items-center gap-2 pb-1 border-b border-slate-700 text-slate-100 font-bold text-sm md:text-base">
+                    <span class="text-blue-400">Section I:</span> Core Probability & Bayesian Analytics
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                    
+                    <!-- F1 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#01. Theoretical Combinatorial Probability</span>
+                            <span class="text-[10px] font-mono text-blue-400 bg-blue-950/60 px-1.5 py-0.5 rounded">Combinatorics</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Exact baseline probability of any specific single number appearing in a single draw:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            P(X = k) = C(N - 1, 5) / C(N, 6) = 6 / N
+                        </div>
+                        <p class="text-[11px] text-slate-500">Yields 13.33% for Mega 6/45 (6/45) and 10.91% for Power 6/55 (6/55).</p>
+                    </div>
+
+                    <!-- F2 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#02. Poisson Rare-Event Distribution</span>
+                            <span class="text-[10px] font-mono text-blue-400 bg-blue-950/60 px-1.5 py-0.5 rounded">Stochastic</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Probability of a specific ball number appearing exactly \(k\) times over \(n\) consecutive draws:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            P(X = k) = (λ^k · e^(-λ)) / k!, where λ = n · (6 / N)
+                        </div>
+                        <p class="text-[11px] text-slate-500">Models variance and standard deviation of ball frequency over moving windows.</p>
+                    </div>
+
+                    <!-- F3 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#03. Bayesian Conjugate Updating</span>
+                            <span class="text-[10px] font-mono text-purple-400 bg-purple-950/60 px-1.5 py-0.5 rounded">Bayesian</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Beta-Binomial conjugate posterior estimation of ball appearance likelihood:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            E[θ|x] = (α + successes) / (α + β + n), with prior α/(α+β) = 6/N
+                        </div>
+                        <p class="text-[11px] text-slate-500">Prevents extreme empirical noise from small sample sizes via Bayesian regularization.</p>
+                    </div>
+
+                    <!-- F4 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#04. Geometric Recency & Gaps Law</span>
+                            <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded">Recency</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Probability of a ball remaining dormant for exactly \(k\) draws before re-emerging:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            P(Gap = k) = (1 - p)^k · p, where p = 6 / N
+                        </div>
+                        <p class="text-[11px] text-slate-500">Expected gap \(E[Gap] = (1 - p)/p \approx 6.5\) (Mega) or \(8.17\) (Power).</p>
+                    </div>
+
+                    <!-- F5 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#05. Exponential Decay Momentum</span>
+                            <span class="text-[10px] font-mono text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded">Time-Series</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Decaying historical frequency weighting giving priority to recent performance:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            W_freq(k) = Σ (e^(-λ · t_i)), where t_i = draw_recency
+                        </div>
+                        <p class="text-[11px] text-slate-500">λ = 0.05 yields half-life decay of ~14 draws, filtering stale historical patterns.</p>
+                    </div>
+
+                    <!-- F6 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#06. Pair Co-occurrence & Jaccard Index</span>
+                            <span class="text-[10px] font-mono text-teal-400 bg-teal-950/60 px-1.5 py-0.5 rounded">Correlation</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Quantifying joint draw frequency affinity between ball pairs \((i, j)\):</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            J(i, j) = |D_i ∩ D_j| / |D_i ∪ D_j| = N_ij / (N_i + N_j - N_ij)
+                        </div>
+                        <p class="text-[11px] text-slate-500">Detects affinity clusters and negative repelling tendencies across the matrix.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 2: Ensemble Scoring & Combinatorial Architecture -->
+            <div class="space-y-3">
+                <div class="flex items-center gap-2 pb-1 border-b border-slate-700 text-slate-100 font-bold text-sm md:text-base">
+                    <span class="text-emerald-400">Section II:</span> Ensemble Scoring & Structural Harmony Filters
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+
+                    <!-- F7 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#07. 8-Factor Ensemble Model Scoring</span>
+                            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded">Ensemble</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Weighted multi-criteria composite score mapped onto 0–100 scale:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Score(k) = Σ w_i · Norm(S_i(k)), with Σ w_i = 1.0
+                        </div>
+                        <p class="text-[11px] text-slate-500">Synthesizes frequency, recency, Bayes, co-occurrence, regime reversion & Monte Carlo.</p>
+                    </div>
+
+                    <!-- F8 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#08. Central Limit Gaussian Sum Filter</span>
+                            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded">Distribution</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Combinatorial sum bell curve expectation based on CLT:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            μ_sum = 6(N + 1)/2; Fitness_sum = exp(-0.5 · ((S - μ)/σ)^2) · 100
+                        </div>
+                        <p class="text-[11px] text-slate-500">6/45: μ = 138 (σ = 33.7); 6/55: μ = 168 (σ = 44.5). Rejects tickets in the tails.</p>
+                    </div>
+
+                    <!-- F9 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#09. Natural Delta Steps Dispersion</span>
+                            <span class="text-[10px] font-mono text-purple-400 bg-purple-950/60 px-1.5 py-0.5 rounded">Delta Steps</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Spacing between sorted numbers \(\Delta_i = x_{i+1} - x_i\):</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            E[Δ_avg] = N / 6; Fitness_Δ = max(0, 100 - |Δ̄ - N/6|·8 - Penalties)
+                        </div>
+                        <p class="text-[11px] text-slate-500">Penalizes clumping (\(\ge 2\) consecutive triples) and unnatural gaps (\(> N/3\)).</p>
+                    </div>
+
+                    <!-- F10 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#10. Hypergeometric Parity (Odd/Even) Filter</span>
+                            <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded">Parity</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Exact combinatorial probability of drawing \(k\) odd numbers:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            P(Odd = k) = [C(N_odd, k) · C(N_even, 6 - k)] / C(N, 6)
+                        </div>
+                        <p class="text-[11px] text-slate-500">3O:3E (~33%), 4O:2E (~24%), 2O:4E (~24%). Eliminates extreme 6O:0E / 0O:6E.</p>
+                    </div>
+
+                    <!-- F11 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#11. Trailing Digit Diversity</span>
+                            <span class="text-[10px] font-mono text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded">Modular</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Uniform distribution of final digits \(d_i = x_i \pmod{10}\):</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Diversity_digit = |Unique({x_i mod 10})| ≥ 5
+                        </div>
+                        <p class="text-[11px] text-slate-500">Penalizes ticket sets sharing 3 or more identical trailing digits (e.g. 03, 13, 23, 33).</p>
+                    </div>
+
+                    <!-- F12 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#12. Shannon Spatial Entropy</span>
+                            <span class="text-[10px] font-mono text-rose-400 bg-rose-950/60 px-1.5 py-0.5 rounded">Information</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Information entropy across 5 numerical buckets \([B_1, \dots, B_5]\):</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            H = - Σ (p_i · log_2(p_i)), where p_i = count(B_i) / 6
+                        </div>
+                        <p class="text-[11px] text-slate-500">Maximized entropy ensures wide coverage across all decimal tiers (1–9, 10–19, etc.).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 3: Extreme Value, Markov & Repeat Constraints -->
+            <div class="space-y-3">
+                <div class="flex items-center gap-2 pb-1 border-b border-slate-700 text-slate-100 font-bold text-sm md:text-base">
+                    <span class="text-purple-400">Section III:</span> Extreme Value Theory, Markov Regimes & Repeat Constraints
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+
+                    <!-- F13 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#13. Order Statistics & Extreme Value Bounds</span>
+                            <span class="text-[10px] font-mono text-indigo-400 bg-indigo-950/60 px-1.5 py-0.5 rounded">EVT</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Expected values of minimal \(X_{(1)}\) and maximal \(X_{(6)}\) numbers:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            E[X_(1)] = (N + 1) / 7;  E[X_(6)] = 6 · (N + 1) / 7
+                        </div>
+                        <p class="text-[11px] text-slate-500">Mega 6/45: \(E[X_1] \approx 6.6\), \(E[X_6] \approx 39.4\); Power 6/55: \(E[X_1] \approx 8.0\), \(E[X_6] \approx 48.0\).</p>
+                    </div>
+
+                    <!-- F14 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#14. Combinatorial Span (Spread)</span>
+                            <span class="text-[10px] font-mono text-indigo-400 bg-indigo-950/60 px-1.5 py-0.5 rounded">Order Stats</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Theoretical difference between largest and smallest ball drawn:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Span = X_(6) - X_(1);  E[Span] = 5 · (N + 1) / 7
+                        </div>
+                        <p class="text-[11px] text-slate-500">Optimal span is 32.8 in Mega and 40.0 in Power. Penalizes compressed spreads (\(< 20\)).</p>
+                    </div>
+
+                    <!-- F15 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#15. Markov Regime Switching Matrix</span>
+                            <span class="text-[10px] font-mono text-purple-400 bg-purple-950/60 px-1.5 py-0.5 rounded">Markov Chain</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Transition probabilities between Low Compression, Bell Curve, and High Extreme:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            P(S_(t+1) = j | S_t = i) = N_ij / Σ_k N_ik
+                        </div>
+                        <p class="text-[11px] text-slate-500">Dynamically forecasts whether the upcoming draw will contract low or expand high.</p>
+                    </div>
+
+                    <!-- F16 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#16. Mean Reversion Oscillator</span>
+                            <span class="text-[10px] font-mono text-rose-400 bg-rose-950/60 px-1.5 py-0.5 rounded">Oscillator</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Normalized Z-score measuring statistical overbought / oversold regimes:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Z_rev = (X̄_recent - μ_sum) / (σ_sum / √k)
+                        </div>
+                        <p class="text-[11px] text-slate-500">Detects elastic pullback after extreme draws (e.g. following low-compressed #1409).</p>
+                    </div>
+
+                    <!-- F17 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#17. Repeat Constraint (Historical Filter)</span>
+                            <span class="text-[10px] font-mono text-red-400 bg-red-950/60 px-1.5 py-0.5 rounded">Hard Filter</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Eliminating excessive carry-over balls from immediately preceding draw:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            |Combo ∩ LastDraw| ≤ 2  (Heavy penalty -60 if ≥ 3)
+                        </div>
+                        <p class="text-[11px] text-slate-500">Empirical validation: 0.0% of historical draws repeated ≥ 3 numbers. Eliminates dead-weight balls.</p>
+                    </div>
+
+                    <!-- F18 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#18. Consecutive Ball Clumping Penalty</span>
+                            <span class="text-[10px] font-mono text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded">Combinatorics</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Penalizing sequential number runs \(x, x+1, x+2\):</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Penalty_run = 20.0 · max(0, Count(Δ = 1) - 1)
+                        </div>
+                        <p class="text-[11px] text-slate-500">Allows at most 1 pair of adjacent numbers (e.g. 23–24); forbids 3+ sequential balls.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 4: Wheeling Systems & Optimization -->
+            <div class="space-y-3">
+                <div class="flex items-center gap-2 pb-1 border-b border-slate-700 text-slate-100 font-bold text-sm md:text-base">
+                    <span class="text-cyan-400">Section IV:</span> Combinatorial Wheeling Systems & Optimization
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+
+                    <!-- F19 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#19. Covering Design C(v, k, t, m)</span>
+                            <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded">Steiner Systems</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Guarantees a match of \(t\) numbers if \(m\) numbers hit within pool \(v\):</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Covering(v=10, k=6, t=3, m=3) = 4 tickets
+                        </div>
+                        <p class="text-[11px] text-slate-500">Compresses 210 full permutations into 4 tickets, saving 98.1% of capital.</p>
+                    </div>
+
+                    <!-- F20 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#20. Triplet Subspace Coverage Metric</span>
+                            <span class="text-[10px] font-mono text-teal-400 bg-teal-950/60 px-1.5 py-0.5 rounded">Coverage</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Ratio of covered 3-element subsets over all \(\binom{v}{3}\) possible triplets:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Coverage = |U_t (Triplets(t_i))| / C(v, 3) · 100%
+                        </div>
+                        <p class="text-[11px] text-slate-500">Quantifies mathematical guarantee of winning 3rd-tier prize packages.</p>
+                    </div>
+
+                    <!-- F21 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#21. Cross-Matrix Suitability Index</span>
+                            <span class="text-[10px] font-mono text-indigo-400 bg-indigo-950/60 px-1.5 py-0.5 rounded">Decision Theory</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Relative utility score advising whether to play Mega 6/45 or Power 6/55:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Score_type = Σ (w_j · Fitness_j(numbers, Config_type))
+                        </div>
+                        <p class="text-[11px] text-slate-500">Evaluates span compactness, boundary ceiling (\(\le 45\)), and jackpot prize expected value.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="bg-slate-950 p-4 border-t border-slate-800 flex items-center justify-between">
+            <span class="text-xs text-slate-400">All 21 formulas are executed on-demand in the Python analysis backend.</span>
+            <button onclick="closeFormulasModal()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+
+    <footer class="bg-slate-950 p-6 mt-12 text-center text-slate-400 text-sm border-t border-slate-800">
+        <p class="mb-2"><span data-i18n="footer_warning_title">⚠️ <strong>CẢNH BÁO:</strong></span> <span data-i18n="footer_warning_desc">Ứng dụng này chỉ dùng cho mục đích phân tích thống kê và giải trí.</span></p>
+        <p data-i18n="footer_disclaimer">Xổ số là trò chơi may rủi. Không có mô hình toán học hay thuật toán nào có thể dự đoán chính xác kết quả. Hãy chơi có trách nhiệm.</p>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="js/app.js"></script>
+</body>
+</html>

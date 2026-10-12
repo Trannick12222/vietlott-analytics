@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: vietlott-analytics
+    env: python
+    region: singapore
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn src.app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      - key: MONTE_CARLO_SIMULATIONS
+        value: "100000"
+      - key: DECAY_FACTOR
+        value: "0.05"

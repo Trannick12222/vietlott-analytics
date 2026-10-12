@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Vietlott Analytics & Prediction</title>
+    <!-- iOS PWA Standalone Support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Vietlott">
+    <link rel="apple-touch-icon" href="/static/img/icon-192.png">
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- HTMX (if needed later) -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <style>
+        body {
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 min-h-screen">
+    <nav class="bg-slate-800 border-b border-slate-700 p-4 sticky top-0 z-40 backdrop-blur-md bg-slate-800/95 shadow-md">
+        <div class="container mx-auto flex flex-wrap justify-between items-center gap-3">
+            <h1 class="text-xl md:text-2xl font-bold text-white flex items-center gap-2">
+                <span class="text-2xl md:text-3xl">🎱</span> Vietlott Analytics
+            </h1>
+            <div class="flex items-center gap-2 md:gap-3">
+                <!-- Nút mở 21 công thức tiếng Anh -->
+                <button onclick="openFormulasModal()" class="bg-indigo-600/80 hover:bg-indigo-600 text-white text-xs md:text-sm px-3 py-2 rounded-lg font-semibold transition flex items-center gap-1.5 border border-indigo-500/50 shadow-sm">
+                    <span>📐</span>
+                    <span data-i18n="nav_formulas">21 Mathematical Formulas (EN)</span>
+                </button>
+
+                <!-- Lựa chọn ngôn ngữ Tiếng Việt / English -->
+                <div class="flex items-center bg-slate-900/90 rounded-lg p-1 border border-slate-700">
+                    <button id="lang-btn-vi" onclick="setLanguage('vi')" class="px-2.5 py-1 text-xs font-bold rounded transition bg-blue-600 text-white shadow">
+                        🇻🇳 VN
+                    </button>
+                    <button id="lang-btn-en" onclick="setLanguage('en')" class="px-2.5 py-1 text-xs font-bold rounded transition text-slate-400 hover:text-white">
+                        🇬🇧 EN
+                    </button>
+                </div>
+
+                <!-- Nút Làm mới dữ liệu -->
+                <button onclick="fetchData()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs md:text-sm px-3 md:px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-1">
+                    <span>🔄</span>
+                    <span data-i18n="nav_refresh">Làm mới dữ liệu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Modal 21 Công Thức Tiếng Anh -->
+    {% include "partials/formulas_modal.html" ignore missing %}
+
+    <footer class="bg-slate-950 p-6 mt-12 text-center text-slate-400 text-sm border-t border-slate-800">
+        <p class="mb-2"><span data-i18n="footer_warning_title">⚠️ <strong>CẢNH BÁO:</strong></span> <span data-i18n="footer_warning_desc">Ứng dụng này chỉ dùng cho mục đích phân tích thống kê và giải trí.</span></p>
+        <p data-i18n="footer_disclaimer">Xổ số là trò chơi may rủi. Không có mô hình toán học hay thuật toán nào có thể dự đoán chính xác kết quả. Hãy chơi có trách nhiệm.</p>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

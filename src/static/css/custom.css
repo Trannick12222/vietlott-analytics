@@ -1,0 +1,110 @@
+/* Ball number styling */
+.ball {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 14px;
+    color: white;
+    margin: 2px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.ball-sm {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+}
+
+.ball-md {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+}
+
+/* Color by range */
+.ball-range-1 { background: linear-gradient(135deg, #ef4444, #dc2626); } /* 1-9 */
+.ball-range-2 { background: linear-gradient(135deg, #f97316, #ea580c); } /* 10-18 */
+.ball-range-3 { background: linear-gradient(135deg, #eab308, #ca8a04); } /* 19-27 */
+.ball-range-4 { background: linear-gradient(135deg, #22c55e, #16a34a); } /* 28-36 */
+.ball-range-5 { background: linear-gradient(135deg, #3b82f6, #2563eb); } /* 37-45 */
+.ball-range-6 { background: linear-gradient(135deg, #8b5cf6, #7c3aed); } /* 46-55 */
+
+/* Score bar */
+.score-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: #334155;
+    overflow: hidden;
+}
+.score-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+.score-high { background: linear-gradient(90deg, #22c55e, #16a34a); }
+.score-medium { background: linear-gradient(90deg, #eab308, #f97316); }
+.score-low { background: linear-gradient(90deg, #ef4444, #dc2626); }
+
+/* Strategy cards */
+.strategy-hot { border-left: 4px solid #ef4444; }
+.strategy-cold { border-left: 4px solid #3b82f6; }
+.strategy-balanced { border-left: 4px solid #22c55e; }
+.strategy-statistical { border-left: 4px solid #8b5cf6; }
+.strategy-random { border-left: 4px solid #6b7280; }
+
+/* Loading animation */
+.htmx-indicator {
+    display: none;
+}
+.htmx-request .htmx-indicator {
+    display: inline-block;
+}
+.htmx-request.htmx-indicator {
+    display: inline-block;
+}
+
+@keyframes pulse-loading {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+.loading-skeleton {
+    animation: pulse-loading 1.5s ease-in-out infinite;
+    background: #334155;
+    border-radius: 4px;
+}
+
+/* Confidence badges */
+.confidence-high { background: #166534; color: #4ade80; }
+.confidence-medium { background: #854d0e; color: #facc15; }
+.confidence-low { background: #991b1b; color: #fca5a5; }
+
+/* Toast notifications */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    z-index: 9999;
+    animation: slideIn 0.3s ease;
+}
+.toast-success { background: #166534; border: 1px solid #22c55e; }
+.toast-error { background: #991b1b; border: 1px solid #ef4444; }
+.toast-info { background: #1e3a5f; border: 1px solid #3b82f6; }
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Print styles */
+@media print {
+    nav, .no-print, button { display: none !important; }
+    body { background: white !important; color: black !important; }
+}

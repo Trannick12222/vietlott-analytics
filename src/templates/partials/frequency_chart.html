@@ -1,0 +1,85 @@
+<div>
+    <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+        Number Frequency Analysis
+    </h2>
+    
+    <div class="relative h-72 w-full">
+        <canvas id="frequencyChart"></canvas>
+    </div>
+    
+    <script>
+        // Init chart when HTMX loads this fragment
+        (function() {
+            const ctx = document.getElementById('frequencyChart').getContext('2d');
+            
+            const labels = {{ chart_labels | tojson | safe }};
+            const data = {{ chart_data | tojson | safe }};
+            
+            // Generate gradient colors based on frequency
+            const maxFreq = Math.max(...data);
+            const minFreq = Math.min(...data);
+            const range = maxFreq - minFreq || 1;
+            
+            const colors = data.map(val => {
+                const ratio = (val - minFreq) / range;
+                // Red for hot (high frequency), Blue for cold (low frequency)
+                // rgb(239, 68, 68) is red-500, rgb(59, 130, 246) is blue-500
+                const r = Math.round(59 + (180 * ratio));
+                const g = Math.round(130 - (62 * ratio));
+                const b = Math.round(246 - (178 * ratio));
+                return `rgba(${r}, ${g}, ${b}, 0.8)`;
+            });
+
+            if (window.freqChart instanceof Chart) {
+                window.freqChart.destroy();
+            }
+
+            window.freqChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Frequency',
+                        data: data,
+                        backgroundColor: colors,
+                        borderColor: colors.map(c => c.replace('0.8', '1')),
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#112240',
+                            titleColor: '#fff',
+                            bodyColor: '#cbd5e1',
+                            borderColor: '#233554',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#233554' },
+                            ticks: { color: '#94a3b8' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { 
+                                color: '#94a3b8',
+                                maxRotation: 90,
+                                minRotation: 0,
+                                autoSkip: false,
+                                font: { size: 10 }
+                            }
+                        }
+                    }
+                }
+            });
+        })();
+    </script>
+</div>

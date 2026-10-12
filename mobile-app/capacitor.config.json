@@ -1,0 +1,12 @@
+{
+  "appId": "com.vietlott.analytics",
+  "appName": "Vietlott Analytics",
+  "webDir": "www",
+  "server": {
+    "cleartext": true,
+    "allowNavigation": ["*"]
+  },
+  "ios": {
+    "contentInset": "always"
+  }
+}

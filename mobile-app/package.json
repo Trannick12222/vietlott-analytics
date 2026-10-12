@@ -1,0 +1,16 @@
+{
+  "name": "vietlott-mobile-ios",
+  "version": "1.0.0",
+  "description": "Vietlott Analytics & Prediction iOS Mobile App",
+  "scripts": {
+    "cap:sync": "cap sync ios",
+    "cap:build": "cap copy ios"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.2.0",
+    "@capacitor/ios": "^6.2.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0"
+  }
+}

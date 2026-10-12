@@ -1,0 +1,9 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+mobile-app/node_modules/
+mobile-app/ios/App/Pods/
+data/vietlott.db-journal

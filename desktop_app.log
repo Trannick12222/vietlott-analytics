@@ -1,0 +1,1014 @@
+2026-10-04 16:59:49,144 [INFO] Database initialized.
+2026-10-04 16:59:49,146 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-04 16:59:49,147 [INFO] Database initialized.
+2026-10-04 16:59:49,185 [INFO] Database initialized.
+2026-10-04 16:59:49,186 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-04 16:59:49,186 [INFO] Background scheduled fetch worker initialized.
+2026-10-04 16:59:49,253 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-04 16:59:49,253 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-04 16:59:59,198 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 16:59:59,198 [INFO] Attempting to fetch latest 20 draws for LotteryType.MEGA_645 from vietlott_official
+2026-10-04 17:00:00,019 [INFO] HTTP Request: GET https://vietlott.vn/vi/trung-thuong/ket-qua-trung-thuong/mega-6-45 "HTTP/1.1 200 OK"
+2026-10-04 17:00:00,053 [WARNING] No data returned from vietlott_official
+2026-10-04 17:00:00,053 [INFO] Attempting to fetch from backup_scraper for LotteryType.MEGA_645
+2026-10-04 17:00:00,053 [INFO] Attempting to fetch from backup source for LotteryType.MEGA_645
+2026-10-04 17:00:00,053 [WARNING] No data returned from backup_scraper
+2026-10-04 17:00:00,053 [INFO] Attempting to fetch from manual_csv for LotteryType.MEGA_645
+2026-10-04 17:00:00,079 [INFO] Auto-fetch completed for MEGA_645: No new draws to add
+2026-10-04 17:00:00,081 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-04 17:00:00,081 [INFO] Attempting to fetch latest 20 draws for LotteryType.POWER_655 from vietlott_official
+2026-10-04 17:00:00,458 [INFO] HTTP Request: GET https://vietlott.vn/vi/trung-thuong/ket-qua-trung-thuong/power-6-55 "HTTP/1.1 302 Found"
+2026-10-04 17:00:00,579 [INFO] HTTP Request: GET https://vietlott.vn/404.html "HTTP/1.1 200 OK"
+2026-10-04 17:00:00,588 [WARNING] No data returned from vietlott_official
+2026-10-04 17:00:00,589 [INFO] Attempting to fetch from backup_scraper for LotteryType.POWER_655
+2026-10-04 17:00:00,589 [INFO] Attempting to fetch from backup source for LotteryType.POWER_655
+2026-10-04 17:00:00,589 [WARNING] No data returned from backup_scraper
+2026-10-04 17:00:00,589 [INFO] Attempting to fetch from manual_csv for LotteryType.POWER_655
+2026-10-04 17:00:00,605 [INFO] Auto-fetch completed for POWER_655: No new draws to add
+2026-10-04 17:01:21,575 [INFO] Database initialized.
+2026-10-04 17:01:21,576 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-04 17:01:21,577 [INFO] Database initialized.
+2026-10-04 17:01:21,615 [INFO] Database initialized.
+2026-10-04 17:01:21,615 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-04 17:01:21,615 [INFO] Background scheduled fetch worker initialized.
+2026-10-04 17:01:21,661 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-04 17:01:21,662 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-04 17:02:04,268 [INFO] Database initialized.
+2026-10-04 17:02:04,269 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-04 17:02:04,270 [INFO] Database initialized.
+2026-10-04 17:02:04,308 [INFO] Database initialized.
+2026-10-04 17:02:04,309 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-04 17:02:04,309 [INFO] Background scheduled fetch worker initialized.
+2026-10-04 17:02:04,355 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-04 17:02:04,355 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-04 17:02:46,636 [INFO] Database initialized.
+2026-10-04 17:02:46,637 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-04 17:02:46,637 [INFO] Database initialized.
+2026-10-04 17:02:46,673 [INFO] Database initialized.
+2026-10-04 17:02:46,673 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-04 17:02:46,673 [INFO] Background scheduled fetch worker initialized.
+2026-10-04 17:02:46,716 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-04 17:02:46,716 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-04 17:02:50,911 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 17:02:50,911 [INFO] Attempting to fetch latest 25 draws for LotteryType.MEGA_645 from vietlott_official
+2026-10-04 17:02:51,567 [INFO] HTTP Request: GET https://vietlott.vn/vi/trung-thuong/ket-qua-trung-thuong/mega-6-45 "HTTP/1.1 200 OK"
+2026-10-04 17:02:51,601 [WARNING] No data returned from vietlott_official
+2026-10-04 17:02:51,601 [INFO] Attempting to fetch from backup_scraper for LotteryType.MEGA_645
+2026-10-04 17:02:51,601 [INFO] Attempting to fetch from backup source for LotteryType.MEGA_645
+2026-10-04 17:02:51,601 [WARNING] No data returned from backup_scraper
+2026-10-04 17:02:51,601 [INFO] Attempting to fetch from manual_csv for LotteryType.MEGA_645
+2026-10-04 17:02:56,668 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 17:02:56,668 [INFO] Attempting to fetch latest 20 draws for LotteryType.MEGA_645 from vietlott_official
+2026-10-04 17:02:57,327 [INFO] HTTP Request: GET https://vietlott.vn/vi/trung-thuong/ket-qua-trung-thuong/mega-6-45 "HTTP/1.1 200 OK"
+2026-10-04 17:02:57,358 [WARNING] No data returned from vietlott_official
+2026-10-04 17:02:57,359 [INFO] Attempting to fetch from backup_scraper for LotteryType.MEGA_645
+2026-10-04 17:02:57,359 [INFO] Attempting to fetch from backup source for LotteryType.MEGA_645
+2026-10-04 17:02:57,359 [WARNING] No data returned from backup_scraper
+2026-10-04 17:02:57,359 [INFO] Attempting to fetch from manual_csv for LotteryType.MEGA_645
+2026-10-04 17:02:57,376 [INFO] Auto-fetch completed for MEGA_645: No new draws to add
+2026-10-04 17:02:57,376 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-04 17:02:57,376 [INFO] Attempting to fetch latest 20 draws for LotteryType.POWER_655 from vietlott_official
+2026-10-04 17:02:57,788 [INFO] HTTP Request: GET https://vietlott.vn/vi/trung-thuong/ket-qua-trung-thuong/power-6-55 "HTTP/1.1 302 Found"
+2026-10-04 17:02:57,912 [INFO] HTTP Request: GET https://vietlott.vn/404.html "HTTP/1.1 200 OK"
+2026-10-04 17:02:57,921 [WARNING] No data returned from vietlott_official
+2026-10-04 17:02:57,921 [INFO] Attempting to fetch from backup_scraper for LotteryType.POWER_655
+2026-10-04 17:02:57,921 [INFO] Attempting to fetch from backup source for LotteryType.POWER_655
+2026-10-04 17:02:57,921 [WARNING] No data returned from backup_scraper
+2026-10-04 17:02:57,921 [INFO] Attempting to fetch from manual_csv for LotteryType.POWER_655
+2026-10-04 17:02:57,942 [INFO] Auto-fetch completed for POWER_655: No new draws to add
+2026-10-04 17:57:54,887 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 17:57:54,887 [INFO] Attempting to fetch latest 25 draws for LotteryType.MEGA_645 from vietlott_official
+2026-10-04 17:57:58,107 [INFO] HTTP Request: GET https://vietlott.vn/vi/trung-thuong/ket-qua-trung-thuong/mega-6-45 "HTTP/1.1 200 OK"
+2026-10-04 17:57:58,139 [WARNING] No data returned from vietlott_official
+2026-10-04 17:57:58,139 [INFO] Attempting to fetch from backup_scraper for LotteryType.MEGA_645
+2026-10-04 17:57:58,139 [INFO] Attempting to fetch from backup source for LotteryType.MEGA_645
+2026-10-04 17:57:58,139 [WARNING] No data returned from backup_scraper
+2026-10-04 17:57:58,139 [INFO] Attempting to fetch from manual_csv for LotteryType.MEGA_645
+2026-10-04 17:58:45,729 [INFO] Application closed.
+2026-10-04 18:09:26,100 [INFO] Database initialized.
+2026-10-04 18:09:26,101 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-04 18:09:26,101 [INFO] Database initialized.
+2026-10-04 18:09:26,136 [INFO] Database initialized.
+2026-10-04 18:09:26,137 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-04 18:09:26,137 [INFO] Background scheduled fetch worker initialized.
+2026-10-04 18:09:26,180 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-04 18:09:26,181 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-04 18:09:28,045 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 18:09:28,046 [INFO] Đang fetch 20 kỳ quay mới nhất cho LotteryType.MEGA_645 từ vietlott_official...
+2026-10-04 18:09:28,058 [ERROR] Error syncing from vietlott_official: 'charmap' codec can't encode character '\u0110' in position 102: character maps to <undefined>
+2026-10-04 18:09:28,073 [INFO] Attempting to fetch from backup_scraper for LotteryType.MEGA_645
+2026-10-04 18:09:28,074 [INFO] Attempting to fetch from backup source for LotteryType.MEGA_645
+2026-10-04 18:09:28,074 [WARNING] No data returned from backup_scraper
+2026-10-04 18:09:28,074 [INFO] Attempting to fetch from manual_csv for LotteryType.MEGA_645
+2026-10-04 18:09:29,132 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 18:09:29,132 [INFO] Đang fetch 20 kỳ quay mới nhất cho LotteryType.MEGA_645 từ vietlott_official...
+2026-10-04 18:09:29,152 [ERROR] Error syncing from vietlott_official: 'charmap' codec can't encode character '\u0110' in position 102: character maps to <undefined>
+2026-10-04 18:09:29,160 [INFO] Attempting to fetch from backup_scraper for LotteryType.MEGA_645
+2026-10-04 18:09:29,160 [INFO] Attempting to fetch from backup source for LotteryType.MEGA_645
+2026-10-04 18:09:29,161 [WARNING] No data returned from backup_scraper
+2026-10-04 18:09:29,161 [INFO] Attempting to fetch from manual_csv for LotteryType.MEGA_645
+2026-10-04 18:09:29,193 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-04 18:09:29,193 [INFO] Đang fetch 20 kỳ quay mới nhất cho LotteryType.POWER_655 từ vietlott_official...
+2026-10-04 18:09:29,194 [ERROR] Error syncing from vietlott_official: 'charmap' codec can't encode character '\u0110' in position 102: character maps to <undefined>
+2026-10-04 18:09:29,199 [INFO] Attempting to fetch from backup_scraper for LotteryType.POWER_655
+2026-10-04 18:09:29,199 [INFO] Attempting to fetch from backup source for LotteryType.POWER_655
+2026-10-04 18:09:29,199 [WARNING] No data returned from backup_scraper
+2026-10-04 18:09:29,199 [INFO] Attempting to fetch from manual_csv for LotteryType.POWER_655
+2026-10-04 18:09:29,314 [INFO] Đã phát hiện và nạp tự động kỳ quay mới cho POWER_655: +20 kỳ
+2026-10-04 18:09:29,315 [ERROR] Lỗi kiểm tra kỳ mới tự động: 'charmap' codec can't encode character '\u0110' in position 92: character maps to <undefined>
+2026-10-04 18:09:29,319 [ERROR] Task exception was never retrieved
+future: <Task finished name='Task-3' coro=<scheduled_fetch_worker() done, defined at D:\Thao\Vietlott\src\app.py:48> exception=UnicodeEncodeError('charmap', '  File "D:\\Thao\\Vietlott\\src\\app.py", line 66, in scheduled_fetch_worker\r\n    logger.info(f"Đã phát hiện và nạp tự động kỳ quay mới cho {lt.value}: +{res.get(\'records_added\')} kỳ")\r\n', 92, 93, 'character maps to <undefined>')>
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1113, in emit
+    stream.write(msg + self.terminator)
+  File "C:\Program Files\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u0110' in position 31: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Thao\Vietlott\src\app.py", line 66, in scheduled_fetch_worker
+    logger.info(f"Đã phát hiện và nạp tự động kỳ quay mới cho {lt.value}: +{res.get('records_added')} kỳ")
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1489, in info
+    self._log(INFO, msg, args, **kwargs)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1634, in _log
+    self.handle(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1644, in handle
+    self.callHandlers(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1706, in callHandlers
+    hdlr.handle(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 978, in handle
+    self.emit(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1118, in emit
+    self.handleError(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1041, in handleError
+    traceback.print_stack(frame, file=sys.stderr)
+  File "C:\Program Files\Python311\Lib\traceback.py", line 210, in print_stack
+    print_list(extract_stack(f, limit=limit), file=file)
+  File "C:\Program Files\Python311\Lib\traceback.py", line 27, in print_list
+    print(item, file=file, end="")
+  File "C:\Program Files\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u0110' in position 92: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1113, in emit
+    stream.write(msg + self.terminator)
+  File "C:\Program Files\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u1ed7' in position 33: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Thao\Vietlott\src\app.py", line 68, in scheduled_fetch_worker
+    logger.error(f"Lỗi kiểm tra kỳ mới tự động: {e}")
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1518, in error
+    self._log(ERROR, msg, args, **kwargs)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1634, in _log
+    self.handle(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1644, in handle
+    self.callHandlers(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1706, in callHandlers
+    hdlr.handle(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 978, in handle
+    self.emit(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1118, in emit
+    self.handleError(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1032, in handleError
+    traceback.print_exception(t, v, tb, None, sys.stderr)
+  File "C:\Program Files\Python311\Lib\traceback.py", line 125, in print_exception
+    te.print(file=file, chain=chain)
+  File "C:\Program Files\Python311\Lib\traceback.py", line 978, in print
+    print(line, file=file, end="")
+  File "C:\Program Files\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u0110' in position 92: character maps to <undefined>
+2026-10-04 18:15:39,209 [INFO] Application closed.
+2026-10-04 18:32:15,511 [INFO] Database initialized.
+2026-10-04 18:32:15,512 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-04 18:32:15,512 [INFO] Database initialized.
+2026-10-04 18:32:15,547 [INFO] Database initialized.
+2026-10-04 18:32:15,548 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-04 18:32:15,548 [INFO] Background scheduled fetch worker initialized.
+2026-10-04 18:32:15,601 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-04 18:32:15,601 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-04 18:32:18,542 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 18:32:18,542 [INFO] Đang fetch 20 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-04 18:32:18,551 [ERROR] Error syncing from vietlott_official: 'charmap' codec can't encode character '\u0110' in position 102: character maps to <undefined>
+2026-10-04 18:32:18,560 [INFO] Attempting to fetch from backup_scraper for LotteryType.MEGA_645
+2026-10-04 18:32:18,560 [INFO] Attempting to fetch from backup source for LotteryType.MEGA_645
+2026-10-04 18:32:18,560 [WARNING] No data returned from backup_scraper
+2026-10-04 18:32:18,560 [INFO] Attempting to fetch from manual_csv for LotteryType.MEGA_645
+2026-10-04 18:32:18,674 [INFO] Đã phát hiện và nạp tự động kỳ quay mới cho MEGA_645: +20 kỳ
+2026-10-04 18:32:18,675 [ERROR] Lỗi kiểm tra kỳ mới tự động: 'charmap' codec can't encode character '\u0110' in position 92: character maps to <undefined>
+2026-10-04 18:32:18,677 [ERROR] Task exception was never retrieved
+future: <Task finished name='Task-3' coro=<scheduled_fetch_worker() done, defined at D:\Thao\Vietlott\src\app.py:48> exception=UnicodeEncodeError('charmap', '  File "D:\\Thao\\Vietlott\\src\\app.py", line 66, in scheduled_fetch_worker\r\n    logger.info(f"Đã phát hiện và nạp tự động kỳ quay mới cho {lt.value}: +{res.get(\'records_added\')} kỳ")\r\n', 92, 93, 'character maps to <undefined>')>
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1113, in emit
+    stream.write(msg + self.terminator)
+  File "C:\Program Files\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u0110' in position 31: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Thao\Vietlott\src\app.py", line 66, in scheduled_fetch_worker
+    logger.info(f"Đã phát hiện và nạp tự động kỳ quay mới cho {lt.value}: +{res.get('records_added')} kỳ")
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1489, in info
+    self._log(INFO, msg, args, **kwargs)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1634, in _log
+    self.handle(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1644, in handle
+    self.callHandlers(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1706, in callHandlers
+    hdlr.handle(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 978, in handle
+    self.emit(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1118, in emit
+    self.handleError(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1041, in handleError
+    traceback.print_stack(frame, file=sys.stderr)
+  File "C:\Program Files\Python311\Lib\traceback.py", line 210, in print_stack
+    print_list(extract_stack(f, limit=limit), file=file)
+  File "C:\Program Files\Python311\Lib\traceback.py", line 27, in print_list
+    print(item, file=file, end="")
+  File "C:\Program Files\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u0110' in position 92: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1113, in emit
+    stream.write(msg + self.terminator)
+  File "C:\Program Files\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u1ed7' in position 33: character maps to <undefined>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Thao\Vietlott\src\app.py", line 68, in scheduled_fetch_worker
+    logger.error(f"Lỗi kiểm tra kỳ mới tự động: {e}")
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1518, in error
+    self._log(ERROR, msg, args, **kwargs)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1634, in _log
+    self.handle(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1644, in handle
+    self.callHandlers(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1706, in callHandlers
+    hdlr.handle(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 978, in handle
+    self.emit(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1118, in emit
+    self.handleError(record)
+  File "C:\Program Files\Python311\Lib\logging\__init__.py", line 1032, in handleError
+    traceback.print_exception(t, v, tb, None, sys.stderr)
+  File "C:\Program Files\Python311\Lib\traceback.py", line 125, in print_exception
+    te.print(file=file, chain=chain)
+  File "C:\Program Files\Python311\Lib\traceback.py", line 978, in print
+    print(line, file=file, end="")
+  File "C:\Program Files\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u0110' in position 92: character maps to <undefined>
+2026-10-04 18:35:34,558 [INFO] Application closed.
+2026-10-04 18:38:54,635 [INFO] Database initialized.
+2026-10-04 18:38:54,636 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-04 18:38:54,636 [INFO] Database initialized.
+2026-10-04 18:38:54,672 [INFO] Database initialized.
+2026-10-04 18:38:54,673 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-04 18:38:54,716 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-04 18:38:54,717 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-04 18:38:57,786 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 18:38:57,786 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-04 18:38:57,902 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 18:38:58,177 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-04 18:39:04,691 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 18:39:04,691 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-04 18:39:04,823 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 18:39:05,028 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-04 18:39:05,069 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-04 18:39:05,069 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-04 18:39:05,164 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 18:39:05,532 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-04 18:44:52,646 [INFO] Application closed.
+2026-10-04 18:54:33,762 [INFO] Database initialized.
+2026-10-04 18:54:33,763 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-04 18:54:33,764 [INFO] Database initialized.
+2026-10-04 18:54:33,798 [INFO] Database initialized.
+2026-10-04 18:54:33,799 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-04 18:54:33,854 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-04 18:54:33,854 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-04 18:54:36,982 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 18:54:36,982 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-04 18:54:37,077 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 18:54:37,380 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-04 18:54:43,803 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 18:54:43,803 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-04 18:54:43,937 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 18:54:44,145 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-04 18:54:44,271 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-04 18:54:44,271 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-04 18:54:44,368 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 18:54:44,663 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-04 18:58:30,822 [INFO] Application closed.
+2026-10-04 19:02:59,216 [INFO] Database initialized.
+2026-10-04 19:02:59,218 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-04 19:02:59,218 [INFO] Database initialized.
+2026-10-04 19:02:59,255 [INFO] Database initialized.
+2026-10-04 19:02:59,255 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-04 19:02:59,315 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-04 19:02:59,315 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-04 19:03:02,707 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 19:03:02,707 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-04 19:03:02,831 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 19:03:03,079 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-04 19:03:09,274 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 19:03:09,274 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-04 19:03:09,409 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 19:03:09,678 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-04 19:03:09,720 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-04 19:03:09,720 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-04 19:03:09,845 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 19:03:10,118 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-04 19:10:02,245 [INFO] Application closed.
+2026-10-04 19:19:19,124 [INFO] Database initialized.
+2026-10-04 19:19:19,125 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-04 19:19:19,126 [INFO] Database initialized.
+2026-10-04 19:19:19,167 [INFO] Database initialized.
+2026-10-04 19:19:19,168 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-04 19:19:19,223 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-04 19:19:19,224 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-04 19:19:29,176 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 19:19:29,176 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-04 19:19:29,280 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 19:19:29,580 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-04 19:19:29,633 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-04 19:19:29,633 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-04 19:19:29,760 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 19:19:30,038 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-04 19:19:47,903 [INFO] Application closed.
+2026-10-04 19:21:25,970 [INFO] Database initialized.
+2026-10-04 19:21:25,971 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-04 19:21:25,972 [INFO] Database initialized.
+2026-10-04 19:21:26,041 [INFO] Database initialized.
+2026-10-04 19:21:26,042 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-04 19:21:26,105 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-04 19:21:26,105 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-04 19:21:29,415 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 19:21:29,415 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-04 19:21:29,510 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 19:21:29,772 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-04 19:21:36,063 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 19:21:36,063 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-04 19:21:36,184 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 19:21:36,463 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-04 19:21:36,504 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-04 19:21:36,504 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-04 19:21:36,634 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 19:21:36,919 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-04 19:45:47,427 [INFO] Application closed.
+2026-10-04 19:46:26,517 [INFO] Database initialized.
+2026-10-04 19:46:26,518 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-04 19:46:26,519 [INFO] Database initialized.
+2026-10-04 19:46:26,555 [INFO] Database initialized.
+2026-10-04 19:46:26,556 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-04 19:46:26,599 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-04 19:46:26,599 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-04 19:46:29,850 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 19:46:29,851 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-04 19:46:29,983 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 19:46:30,240 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-04 19:46:36,567 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-04 19:46:36,567 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-04 19:46:36,676 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 19:46:36,947 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-04 19:46:37,001 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-04 19:46:37,002 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-04 19:46:37,123 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-04 19:46:37,418 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-04 20:18:10,276 [INFO] Application closed.
+2026-10-05 13:55:09,912 [INFO] Database initialized.
+2026-10-05 13:55:09,914 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-05 13:55:09,914 [INFO] Database initialized.
+2026-10-05 13:55:09,960 [INFO] Database initialized.
+2026-10-05 13:55:09,960 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-05 13:55:10,038 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-05 13:55:10,038 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-05 13:55:13,512 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 13:55:13,512 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 13:55:13,782 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 13:55:14,047 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 13:55:19,982 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 13:55:19,983 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 13:55:20,130 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 13:55:20,418 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 13:55:20,459 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 13:55:20,459 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 13:55:20,551 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 13:55:20,833 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 13:58:30,243 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 13:58:30,244 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 13:58:30,351 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 13:58:30,671 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 13:59:40,306 [INFO] Application closed.
+2026-10-05 14:00:02,045 [INFO] Database initialized.
+2026-10-05 14:00:02,046 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-05 14:00:02,046 [INFO] Database initialized.
+2026-10-05 14:00:02,081 [INFO] Database initialized.
+2026-10-05 14:00:02,081 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-05 14:00:02,125 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-05 14:00:02,126 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-05 14:00:05,710 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 14:00:05,710 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 14:00:05,830 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 14:00:06,069 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 14:00:12,105 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 14:00:12,105 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 14:00:12,217 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 14:00:12,496 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 14:00:12,537 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 14:00:12,537 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 14:00:12,635 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 14:00:12,925 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 14:00:40,108 [INFO] Application closed.
+2026-10-05 14:35:48,403 [INFO] Database initialized.
+2026-10-05 14:35:48,404 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-05 14:35:48,404 [INFO] Database initialized.
+2026-10-05 14:35:48,438 [INFO] Database initialized.
+2026-10-05 14:35:48,439 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-05 14:35:48,499 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-05 14:35:48,499 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-05 14:35:51,611 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 14:35:51,611 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 14:35:51,753 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 14:35:51,986 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 14:35:58,458 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 14:35:58,459 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 14:35:58,551 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 14:35:58,862 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 14:35:58,909 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 14:35:58,909 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 14:35:59,027 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 14:35:59,312 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 14:58:21,097 [INFO] Application closed.
+2026-10-05 15:03:05,084 [INFO] Database initialized.
+2026-10-05 15:03:05,085 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-05 15:03:05,085 [INFO] Database initialized.
+2026-10-05 15:03:05,119 [INFO] Database initialized.
+2026-10-05 15:03:05,120 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-05 15:03:05,165 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-05 15:03:05,165 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-05 15:03:08,516 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 15:03:08,516 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 15:03:08,627 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:03:08,869 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 15:03:15,129 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 15:03:15,129 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 15:03:15,272 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:03:15,564 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 15:03:15,605 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 15:03:15,605 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 15:03:15,740 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:03:16,010 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 15:05:44,051 [INFO] Application closed.
+2026-10-05 15:13:33,128 [INFO] Database initialized.
+2026-10-05 15:13:33,129 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-05 15:13:33,130 [INFO] Database initialized.
+2026-10-05 15:13:33,166 [INFO] Database initialized.
+2026-10-05 15:13:33,166 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-05 15:13:33,232 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-05 15:13:33,232 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-05 15:13:36,300 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 15:13:36,301 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 15:13:36,418 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:13:36,649 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 15:13:43,168 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 15:13:43,169 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 15:13:43,305 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:13:43,565 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 15:13:43,607 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 15:13:43,607 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 15:13:43,731 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:13:44,009 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 15:16:26,497 [INFO] Application closed.
+2026-10-05 15:17:48,923 [INFO] Database initialized.
+2026-10-05 15:17:48,924 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-05 15:17:48,925 [INFO] Database initialized.
+2026-10-05 15:17:48,960 [INFO] Database initialized.
+2026-10-05 15:17:48,960 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-05 15:17:49,019 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-05 15:17:49,020 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-05 15:17:52,066 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 15:17:52,066 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 15:17:52,194 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:17:52,428 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 15:17:58,955 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 15:17:58,955 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 15:17:59,647 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:17:59,942 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 15:17:59,992 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 15:17:59,992 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 15:18:00,429 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:18:00,696 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 15:29:49,526 [INFO] Application closed.
+2026-10-05 15:49:27,423 [INFO] Database initialized.
+2026-10-05 15:49:27,424 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-05 15:49:27,425 [INFO] Database initialized.
+2026-10-05 15:49:27,462 [INFO] Database initialized.
+2026-10-05 15:49:27,462 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-05 15:49:27,508 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-05 15:49:27,508 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-05 15:49:30,600 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 15:49:30,600 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 15:49:30,724 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:49:30,985 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 15:49:37,473 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 15:49:37,474 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 15:49:37,611 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:49:37,900 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 15:49:37,948 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 15:49:37,948 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 15:49:38,076 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:49:38,360 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 15:54:12,010 [INFO] Application closed.
+2026-10-05 15:54:15,665 [INFO] Database initialized.
+2026-10-05 15:54:15,666 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-05 15:54:15,667 [INFO] Database initialized.
+2026-10-05 15:54:15,704 [INFO] Database initialized.
+2026-10-05 15:54:15,705 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-05 15:54:15,752 [INFO] HTTP Request: GET http://127.0.0.1:54487/api/health "HTTP/1.1 200 OK"
+2026-10-05 15:54:15,752 [INFO] Server ready at http://127.0.0.1:54487. Opening GUI window...
+2026-10-05 15:54:18,921 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 15:54:18,921 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 15:54:19,018 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:54:19,277 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 15:54:25,724 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 15:54:25,724 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 15:54:25,862 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:54:26,140 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 15:54:26,183 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 15:54:26,183 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 15:54:26,316 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 15:54:26,588 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 16:03:44,831 [INFO] Application closed.
+2026-10-05 16:57:43,867 [INFO] Database initialized.
+2026-10-05 16:57:43,868 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-05 16:57:43,869 [INFO] Database initialized.
+2026-10-05 16:57:43,904 [INFO] Database initialized.
+2026-10-05 16:57:43,904 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-05 16:57:43,950 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-05 16:57:43,951 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-05 16:57:47,330 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 16:57:47,330 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 16:57:47,449 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 16:57:47,682 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 16:57:53,930 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 16:57:53,931 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 16:57:54,081 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 16:57:54,345 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 16:57:54,385 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 16:57:54,386 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 16:57:54,494 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 16:57:54,803 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 17:09:39,636 [INFO] Application closed.
+2026-10-05 17:09:47,705 [INFO] Database initialized.
+2026-10-05 17:09:47,706 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-05 17:09:47,707 [INFO] Database initialized.
+2026-10-05 17:09:47,741 [INFO] Database initialized.
+2026-10-05 17:09:47,742 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-05 17:09:47,786 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-05 17:09:47,786 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-05 17:09:51,038 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 17:09:51,038 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 17:09:51,151 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 17:09:51,381 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 17:09:57,740 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 17:09:57,741 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 17:09:58,839 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 17:09:59,124 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 17:09:59,165 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 17:09:59,165 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 17:09:59,285 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 17:09:59,546 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 18:09:59,580 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 18:09:59,581 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 18:09:59,690 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 18:09:59,895 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 18:09:59,936 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 18:09:59,936 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 18:10:00,054 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 18:10:00,419 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 19:00:21,418 [INFO] Application closed.
+2026-10-05 19:14:50,292 [INFO] Database initialized.
+2026-10-05 19:14:50,293 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-05 19:14:50,295 [INFO] Database initialized.
+2026-10-05 19:14:50,329 [INFO] Database initialized.
+2026-10-05 19:14:50,330 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-05 19:14:50,396 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-05 19:14:50,396 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-05 19:14:53,753 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 19:14:53,754 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 19:14:53,856 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 19:14:54,102 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 19:15:00,339 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 19:15:00,340 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 19:15:00,452 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 19:15:00,725 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 19:15:00,765 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 19:15:00,765 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 19:15:00,889 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 19:15:01,160 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 19:17:58,183 [INFO] Application closed.
+2026-10-05 19:20:14,388 [INFO] Database initialized.
+2026-10-05 19:20:14,389 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-05 19:20:14,389 [INFO] Database initialized.
+2026-10-05 19:20:14,424 [INFO] Database initialized.
+2026-10-05 19:20:14,425 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-05 19:20:14,470 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-05 19:20:14,471 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-05 19:20:17,688 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 19:20:17,688 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 19:20:17,807 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 19:20:18,074 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 19:20:24,436 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 19:20:24,436 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 19:20:24,532 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 19:20:24,824 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 19:20:24,867 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 19:20:24,867 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 19:20:24,994 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 19:20:25,271 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 19:25:07,165 [INFO] Application closed.
+2026-10-05 19:31:07,536 [INFO] Database initialized.
+2026-10-05 19:31:07,537 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-05 19:31:07,537 [INFO] Database initialized.
+2026-10-05 19:31:07,572 [INFO] Database initialized.
+2026-10-05 19:31:07,572 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-05 19:31:07,618 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-05 19:31:07,618 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-05 19:31:10,946 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 19:31:10,946 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 19:31:11,081 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 19:31:11,321 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 19:31:17,560 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-05 19:31:17,560 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-05 19:31:17,674 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 19:31:17,967 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-05 19:31:18,008 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-05 19:31:18,008 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-05 19:31:18,128 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-05 19:31:18,398 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-05 19:37:58,150 [INFO] Application closed.
+2026-10-06 12:56:04,504 [INFO] Database initialized.
+2026-10-06 12:56:04,507 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-06 12:56:04,509 [INFO] Database initialized.
+2026-10-06 12:56:04,611 [INFO] Database initialized.
+2026-10-06 12:56:04,612 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-06 12:56:04,713 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-06 12:56:04,714 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-06 12:56:08,279 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-06 12:56:08,279 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-06 12:56:08,395 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-06 12:56:08,643 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-06 12:56:14,629 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-06 12:56:14,629 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-06 12:56:14,756 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-06 12:56:14,972 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-06 12:56:15,012 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-06 12:56:15,012 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-06 12:56:15,132 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-06 12:56:15,470 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-06 13:02:11,770 [INFO] Application closed.
+2026-10-08 09:00:01,911 [INFO] Database initialized.
+2026-10-08 09:00:01,913 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-08 09:00:01,913 [INFO] Database initialized.
+2026-10-08 09:00:01,959 [INFO] Database initialized.
+2026-10-08 09:00:01,959 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-08 09:00:02,025 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-08 09:00:02,025 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-08 09:00:08,137 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-08 09:00:08,137 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-08 09:00:08,250 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-08 09:00:08,509 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-08 09:00:11,971 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-08 09:00:11,971 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-08 09:00:12,095 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-08 09:00:12,312 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-08 09:00:12,363 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-08 09:00:12,363 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-08 09:00:12,458 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-08 09:00:12,809 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-08 09:00:12,863 [INFO] Cap nhat ky moi cho POWER_655: +1 ky
+2026-10-08 10:00:12,834 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-08 10:00:12,834 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-08 10:00:12,932 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-08 10:00:13,149 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-08 10:00:13,195 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-08 10:00:13,195 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-08 10:00:13,297 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-08 10:00:13,659 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-08 11:00:13,649 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-08 11:00:13,649 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-08 11:00:13,767 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-08 11:00:13,984 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-08 11:00:14,026 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-08 11:00:14,026 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-08 11:00:14,150 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-08 11:00:14,500 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-08 12:00:14,588 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-08 12:00:14,588 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-08 12:00:14,939 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-08 12:00:15,167 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-08 12:00:15,214 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-08 12:00:15,214 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-08 12:00:15,296 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-08 12:00:15,703 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-08 12:45:02,099 [INFO] Application closed.
+2026-10-10 08:12:53,129 [INFO] Database initialized.
+2026-10-10 08:12:53,131 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-10 08:12:53,131 [INFO] Database initialized.
+2026-10-10 08:12:53,178 [INFO] Database initialized.
+2026-10-10 08:12:53,180 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-10 08:12:53,246 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-10 08:12:53,247 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-10 08:12:57,033 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-10 08:12:57,033 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-10 08:12:57,157 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-10 08:12:57,416 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-10 08:13:03,196 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-10 08:13:03,196 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-10 08:13:03,343 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-10 08:13:03,656 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-10 08:13:03,729 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-10 08:13:03,730 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-10 08:13:03,832 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-10 08:13:04,159 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-10 08:13:04,212 [INFO] Cap nhat ky moi cho POWER_655: +1 ky
+2026-10-10 08:13:04,832 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-10 08:13:04,832 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-10 08:13:04,929 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-10 08:13:05,313 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-10 09:13:04,144 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-10 09:13:04,145 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-10 09:13:04,278 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-10 09:13:04,513 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-10 09:13:04,558 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-10 09:13:04,558 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-10 09:13:04,684 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-10 09:13:05,052 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-10 10:13:05,070 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-10 10:13:05,070 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-10 10:13:05,177 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-10 10:13:05,397 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-10 10:13:05,441 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-10 10:13:05,441 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-10 10:13:05,560 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-10 10:13:05,913 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-10 11:13:05,894 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-10 11:13:05,895 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-10 11:13:06,026 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-10 11:13:06,252 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-10 11:13:06,294 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-10 11:13:06,294 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-10 11:13:06,416 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-10 11:13:06,795 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-10 11:39:13,195 [INFO] Application closed.
+2026-10-11 05:31:16,903 [INFO] Database initialized.
+2026-10-11 05:31:16,905 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-11 05:31:16,905 [INFO] Database initialized.
+2026-10-11 05:31:16,948 [INFO] Database initialized.
+2026-10-11 05:31:16,949 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-11 05:31:17,014 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-11 05:31:17,015 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-11 05:31:20,528 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-11 05:31:20,528 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-11 05:31:20,650 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 05:31:20,890 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-11 05:31:26,968 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-11 05:31:26,969 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-11 05:31:27,101 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 05:31:27,325 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-11 05:31:27,367 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-11 05:31:27,368 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-11 05:31:27,487 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 05:31:27,824 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-11 05:31:27,873 [INFO] Cap nhat ky moi cho POWER_655: +1 ky
+2026-10-11 05:33:28,709 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-11 05:33:28,709 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-11 05:33:28,804 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 05:33:29,096 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-11 05:33:55,253 [INFO] Application closed.
+2026-10-11 14:28:28,805 [INFO] Database initialized.
+2026-10-11 14:28:28,806 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-11 14:28:28,806 [INFO] Database initialized.
+2026-10-11 14:28:28,847 [INFO] Database initialized.
+2026-10-11 14:28:28,848 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-11 14:28:28,935 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-11 14:28:28,936 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-11 14:28:32,947 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-11 14:28:32,952 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-11 14:28:33,987 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 14:28:34,356 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-11 14:28:38,854 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-11 14:28:38,854 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-11 14:28:38,979 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 14:28:39,209 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-11 14:28:39,250 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-11 14:28:39,250 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-11 14:28:39,381 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 14:28:39,738 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-11 14:39:01,414 [INFO] Application closed.
+2026-10-11 14:47:21,901 [INFO] Database initialized.
+2026-10-11 14:47:21,902 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-11 14:47:21,902 [INFO] Database initialized.
+2026-10-11 14:47:21,939 [INFO] Database initialized.
+2026-10-11 14:47:21,940 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-11 14:47:21,985 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-11 14:47:21,985 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-11 14:47:25,281 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-11 14:47:25,281 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-11 14:47:25,389 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 14:47:25,631 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-11 14:47:31,944 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-11 14:47:31,944 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-11 14:47:32,070 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 14:47:32,284 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-11 14:47:32,325 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-11 14:47:32,325 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-11 14:47:32,453 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 14:47:32,779 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-11 15:02:02,663 [INFO] Application closed.
+2026-10-11 16:27:30,922 [INFO] Database initialized.
+2026-10-11 16:27:30,923 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-11 16:27:30,923 [INFO] Database initialized.
+2026-10-11 16:27:30,966 [INFO] Database initialized.
+2026-10-11 16:27:30,966 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-11 16:27:31,049 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-11 16:27:31,049 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-11 16:27:34,668 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-11 16:27:34,777 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-11 16:27:35,500 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 16:27:35,792 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-11 16:27:40,995 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-11 16:27:40,995 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-11 16:27:41,107 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 16:27:41,348 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-11 16:27:41,392 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-11 16:27:41,392 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-11 16:27:41,495 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 16:27:41,933 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-11 16:28:23,845 [INFO] Application closed.
+2026-10-11 16:28:40,314 [INFO] Database initialized.
+2026-10-11 16:28:40,315 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-11 16:28:40,316 [INFO] Database initialized.
+2026-10-11 16:28:40,355 [INFO] Database initialized.
+2026-10-11 16:28:40,356 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-11 16:28:40,407 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-11 16:28:40,408 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-11 16:28:43,995 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-11 16:28:43,995 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-11 16:28:44,114 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 16:28:44,371 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-11 16:28:50,356 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-11 16:28:50,356 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-11 16:28:50,471 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 16:28:50,764 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-11 16:28:50,808 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-11 16:28:50,808 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-11 16:28:50,926 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-11 16:28:51,247 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-11 16:32:24,563 [INFO] Application closed.
+2026-10-12 10:19:20,815 [INFO] Database initialized.
+2026-10-12 10:19:20,816 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-12 10:19:20,816 [INFO] Database initialized.
+2026-10-12 10:19:20,871 [INFO] Database initialized.
+2026-10-12 10:19:20,872 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-12 10:19:20,959 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-12 10:19:20,960 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-12 10:19:25,191 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 10:19:25,191 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 10:19:25,339 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 10:19:25,603 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 10:19:30,878 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 10:19:30,878 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 10:19:30,986 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 10:19:31,243 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 10:19:31,293 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-12 10:19:31,293 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-12 10:19:31,394 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 10:19:31,796 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-12 10:30:55,873 [INFO] Application closed.
+2026-10-12 10:39:41,265 [INFO] Database initialized.
+2026-10-12 10:39:41,266 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-12 10:39:41,266 [INFO] Database initialized.
+2026-10-12 10:39:41,305 [INFO] Database initialized.
+2026-10-12 10:39:41,305 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-12 10:39:41,355 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-12 10:39:41,355 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-12 10:39:44,655 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 10:39:44,655 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 10:39:44,796 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 10:39:45,033 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 10:39:51,313 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 10:39:51,313 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 10:39:51,448 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 10:39:51,742 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 10:39:51,784 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-12 10:39:51,784 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-12 10:39:51,910 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 10:39:52,204 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-12 10:42:06,989 [INFO] Application closed.
+2026-10-12 10:44:51,183 [INFO] Database initialized.
+2026-10-12 10:44:51,184 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-12 10:44:51,185 [INFO] Database initialized.
+2026-10-12 10:44:51,223 [INFO] Database initialized.
+2026-10-12 10:44:51,223 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-12 10:44:51,291 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-12 10:44:51,291 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-12 10:44:54,478 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 10:44:54,478 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 10:44:54,617 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 10:44:54,864 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 10:45:01,226 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 10:45:01,226 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 10:45:01,335 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 10:45:01,611 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 10:45:01,659 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-12 10:45:01,659 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-12 10:45:01,766 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 10:45:02,042 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-12 10:45:23,708 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 10:45:23,708 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 10:45:23,792 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 10:45:24,112 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 10:53:49,656 [INFO] Application closed.
+2026-10-12 12:46:48,601 [INFO] Database initialized.
+2026-10-12 12:46:48,602 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-12 12:46:48,602 [INFO] Database initialized.
+2026-10-12 12:46:48,640 [INFO] Database initialized.
+2026-10-12 12:46:48,640 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-12 12:46:48,688 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-12 12:46:48,688 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-12 12:46:53,171 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 12:46:53,171 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 12:46:53,318 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 12:46:53,555 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 12:46:58,627 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 12:46:58,627 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 12:46:58,740 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 12:46:58,965 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 12:46:59,009 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-12 12:46:59,009 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-12 12:46:59,139 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 12:46:59,481 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-12 12:55:09,592 [INFO] Application closed.
+2026-10-12 12:58:06,197 [INFO] Database initialized.
+2026-10-12 12:58:06,198 [INFO] Starting Vietlott Analytics Desktop application...
+2026-10-12 12:58:06,198 [INFO] Database initialized.
+2026-10-12 12:58:06,235 [INFO] Database initialized.
+2026-10-12 12:58:06,235 [INFO] Vietlott Analytics started with automated background scheduler.
+2026-10-12 12:58:06,284 [INFO] HTTP Request: GET http://127.0.0.1:8000/api/health "HTTP/1.1 200 OK"
+2026-10-12 12:58:06,284 [INFO] Server ready at http://127.0.0.1:8000. Opening GUI window...
+2026-10-12 12:58:10,658 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 12:58:10,658 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 12:58:10,777 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 12:58:11,020 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 12:58:16,244 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 12:58:16,244 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 12:58:16,374 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 12:58:16,661 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 12:58:16,703 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-12 12:58:16,703 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-12 12:58:16,838 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 12:58:17,111 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-12 13:00:41,665 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 13:00:41,665 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 13:00:41,753 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 13:00:42,108 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 13:00:45,872 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 13:00:45,872 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 13:00:45,998 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 13:00:46,285 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 13:00:47,722 [INFO] Attempting to fetch from vietlott_official for LotteryType.MEGA_645
+2026-10-12 13:00:47,723 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.MEGA_645...
+2026-10-12 13:00:47,830 [INFO] HTTP Request: GET https://xskt.com.vn/xsmega645/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 13:00:48,069 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.MEGA_645
+2026-10-12 13:02:44,920 [INFO] Attempting to fetch from vietlott_official for LotteryType.POWER_655
+2026-10-12 13:02:44,920 [INFO] Đang fetch 100 kỳ quay mới nhất cho LotteryType.POWER_655...
+2026-10-12 13:02:45,060 [INFO] HTTP Request: GET https://xskt.com.vn/xspower/100-ngay "HTTP/1.1 200 OK"
+2026-10-12 13:02:45,422 [INFO] Lấy thành công 100 kỳ từ xskt.com.vn cho LotteryType.POWER_655
+2026-10-12 13:27:58,605 [INFO] Application closed.

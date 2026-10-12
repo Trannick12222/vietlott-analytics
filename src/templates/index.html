@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex flex-col gap-6">
+    <!-- Info bar & Tabs -->
+    <div class="flex flex-col md:flex-row justify-between items-center bg-slate-800 p-4 rounded-lg">
+        <div class="flex gap-2 mb-4 md:mb-0">
+            <button id="tab-MEGA_645" onclick="switchLottery('MEGA_645')" class="lottery-tab bg-blue-600 text-white px-6 py-2 rounded-lg font-bold transition-colors">MEGA 6/45</button>
+            <button id="tab-POWER_655" onclick="switchLottery('POWER_655')" class="lottery-tab bg-slate-700 text-gray-300 hover:bg-slate-600 px-6 py-2 rounded-lg font-bold transition-colors">POWER 6/55</button>
+        </div>
+        <div class="text-sm text-slate-400 flex gap-4">
+            <div><span data-i18n="total_draws_label">Tổng số kỳ quay:</span> <span id="total-draws" class="text-white font-mono">0</span></div>
+            <div><span data-i18n="last_updated_label">Cập nhật lần cuối:</span> <span id="last-fetch" class="text-white font-mono">--</span></div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Left Column: Draws & Stats -->
+        <div class="lg:col-span-1 space-y-6">
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>📋</span> <span data-i18n="sec_draw_history">Lịch Sử Quay Thưởng</span>
+                    </h2>
+                </div>
+                <div class="p-4" id="draws-table">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>🔥</span> <span data-i18n="sec_hot_cold">Hot & Cold Numbers</span>
+                    </h2>
+                </div>
+                <div class="p-4" id="hot-cold-content">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Charts & Predictions -->
+        <div class="lg:col-span-2 space-y-6">
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>📊</span> <span data-i18n="sec_frequency">Tần Suất Xuất Hiện</span>
+                    </h2>
+                </div>
+                <div class="p-4 h-64">
+                    <canvas id="frequency-canvas"></canvas>
+                </div>
+            </div>
+
+            <!-- Dự Báo Nhịp Dải & Trạng Thái Cực Trị -->
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="p-4">
+                    {% include "partials/regime_forecast.html" ignore missing %}
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700 flex justify-between items-center">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>🤖</span> <span data-i18n="sec_predictions">Bảng Điểm Mô Hình (Predictions)</span>
+                    </h2>
+                    <div class="flex items-center gap-2 text-sm">
+                        <label for="threshold" class="text-slate-400" data-i18n="filter_model_score">Lọc Model Score &ge;</label>
+                        <input type="range" id="threshold" min="0" max="100" value="50" oninput="updateThreshold(this.value)" onchange="updateThreshold(this.value)" class="w-24 accent-blue-500">
+                        <span id="threshold-value" class="text-white font-mono w-6">50</span>
+                    </div>
+                </div>
+                <div class="p-4" id="predictions-table">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>🎲</span> <span data-i18n="sec_combinations">Gợi Ý Bộ Số (Combinations)</span>
+                    </h2>
+                </div>
+                <div class="p-4">
+                    {% include "partials/combinations.html" ignore missing %}
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>⚖️</span> <span data-i18n="sec_prob_comparison">Xác Suất vs Mô Hình</span>
+                    </h2>
+                </div>
+                <div class="p-4">
+                    {% include "partials/probability_comparison.html" ignore missing %}
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg shadow-lg border border-slate-700 overflow-hidden">
+                <div class="bg-slate-750 p-4 border-b border-slate-700">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>🧪</span> <span data-i18n="sec_backtest">Kiểm Thử Lịch Sử (Backtesting)</span>
+                    </h2>
+                </div>
+                <div class="p-4">
+                    {% include "partials/backtest.html" ignore missing %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

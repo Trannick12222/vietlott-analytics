@@ -1,0 +1,352 @@
+<!-- Modal Chi Tiết 21 Công Thức Toán Học (Mathematical Formulas Reference) -->
+<div id="formulas-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-3 md:p-6 transition-all">
+    <div class="bg-slate-900 border border-slate-700 w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-900/60 via-indigo-900/60 to-purple-900/60 p-4 md:p-5 border-b border-slate-700/80 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl md:text-3xl">📐</span>
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                        <span>Mathematical Engine & Formulas Specification</span>
+                        <span class="text-xs bg-indigo-500/30 text-indigo-300 border border-indigo-400/30 px-2 py-0.5 rounded-full font-mono">21 Formulas</span>
+                    </h3>
+                    <p class="text-xs text-slate-300 mt-0.5">Comprehensive theoretical foundation, scoring algorithms, and statistical mechanics implemented in this platform.</p>
+                </div>
+            </div>
+            <button onclick="closeFormulasModal()" class="w-8 h-8 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-lg font-bold transition">
+                ✕
+            </button>
+        </div>
+
+        <!-- Body Scrollable -->
+        <div class="p-4 md:p-6 overflow-y-auto space-y-6 text-slate-300 text-xs md:text-sm">
+            
+            <!-- Quick Summary Disclaimer -->
+            <div class="bg-amber-950/30 border border-amber-600/60 rounded-xl p-3.5 text-xs text-amber-200/90 flex items-start gap-3">
+                <span class="text-lg mt-0.5">⚠️</span>
+                <div>
+                    <strong class="text-amber-300">Methodological Disclosure:</strong>
+                    Lottery balls drawn in Mega 6/45 and Power 6/55 are physically independent random events with uniform baseline probability \(P = 6 / N\). The formulas below quantify historical empirical trends, stochastic regime clustering, combinatorial fitness, and risk mitigation — they do not guarantee winning.
+                </div>
+            </div>
+
+            <!-- Group 1: Core Probability & Statistical Engine -->
+            <div class="space-y-3">
+                <div class="flex items-center gap-2 pb-1 border-b border-slate-700 text-slate-100 font-bold text-sm md:text-base">
+                    <span class="text-blue-400">Section I:</span> Core Probability & Bayesian Analytics
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                    
+                    <!-- F1 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#01. Theoretical Combinatorial Probability</span>
+                            <span class="text-[10px] font-mono text-blue-400 bg-blue-950/60 px-1.5 py-0.5 rounded">Combinatorics</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Exact baseline probability of any specific single number appearing in a single draw:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            P(X = k) = C(N - 1, 5) / C(N, 6) = 6 / N
+                        </div>
+                        <p class="text-[11px] text-slate-500">Yields 13.33% for Mega 6/45 (6/45) and 10.91% for Power 6/55 (6/55).</p>
+                    </div>
+
+                    <!-- F2 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#02. Poisson Rare-Event Distribution</span>
+                            <span class="text-[10px] font-mono text-blue-400 bg-blue-950/60 px-1.5 py-0.5 rounded">Stochastic</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Probability of a specific ball number appearing exactly \(k\) times over \(n\) consecutive draws:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            P(X = k) = (λ^k · e^(-λ)) / k!, where λ = n · (6 / N)
+                        </div>
+                        <p class="text-[11px] text-slate-500">Models variance and standard deviation of ball frequency over moving windows.</p>
+                    </div>
+
+                    <!-- F3 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#03. Bayesian Conjugate Updating</span>
+                            <span class="text-[10px] font-mono text-purple-400 bg-purple-950/60 px-1.5 py-0.5 rounded">Bayesian</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Beta-Binomial conjugate posterior estimation of ball appearance likelihood:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            E[θ|x] = (α + successes) / (α + β + n), with prior α/(α+β) = 6/N
+                        </div>
+                        <p class="text-[11px] text-slate-500">Prevents extreme empirical noise from small sample sizes via Bayesian regularization.</p>
+                    </div>
+
+                    <!-- F4 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#04. Geometric Recency & Gaps Law</span>
+                            <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded">Recency</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Probability of a ball remaining dormant for exactly \(k\) draws before re-emerging:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            P(Gap = k) = (1 - p)^k · p, where p = 6 / N
+                        </div>
+                        <p class="text-[11px] text-slate-500">Expected gap \(E[Gap] = (1 - p)/p \approx 6.5\) (Mega) or \(8.17\) (Power).</p>
+                    </div>
+
+                    <!-- F5 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#05. Exponential Decay Momentum</span>
+                            <span class="text-[10px] font-mono text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded">Time-Series</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Decaying historical frequency weighting giving priority to recent performance:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            W_freq(k) = Σ (e^(-λ · t_i)), where t_i = draw_recency
+                        </div>
+                        <p class="text-[11px] text-slate-500">λ = 0.05 yields half-life decay of ~14 draws, filtering stale historical patterns.</p>
+                    </div>
+
+                    <!-- F6 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#06. Pair Co-occurrence & Jaccard Index</span>
+                            <span class="text-[10px] font-mono text-teal-400 bg-teal-950/60 px-1.5 py-0.5 rounded">Correlation</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Quantifying joint draw frequency affinity between ball pairs \((i, j)\):</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            J(i, j) = |D_i ∩ D_j| / |D_i ∪ D_j| = N_ij / (N_i + N_j - N_ij)
+                        </div>
+                        <p class="text-[11px] text-slate-500">Detects affinity clusters and negative repelling tendencies across the matrix.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 2: Ensemble Scoring & Combinatorial Architecture -->
+            <div class="space-y-3">
+                <div class="flex items-center gap-2 pb-1 border-b border-slate-700 text-slate-100 font-bold text-sm md:text-base">
+                    <span class="text-emerald-400">Section II:</span> Ensemble Scoring & Structural Harmony Filters
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+
+                    <!-- F7 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#07. 8-Factor Ensemble Model Scoring</span>
+                            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded">Ensemble</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Weighted multi-criteria composite score mapped onto 0–100 scale:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Score(k) = Σ w_i · Norm(S_i(k)), with Σ w_i = 1.0
+                        </div>
+                        <p class="text-[11px] text-slate-500">Synthesizes frequency, recency, Bayes, co-occurrence, regime reversion & Monte Carlo.</p>
+                    </div>
+
+                    <!-- F8 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#08. Central Limit Gaussian Sum Filter</span>
+                            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded">Distribution</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Combinatorial sum bell curve expectation based on CLT:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            μ_sum = 6(N + 1)/2; Fitness_sum = exp(-0.5 · ((S - μ)/σ)^2) · 100
+                        </div>
+                        <p class="text-[11px] text-slate-500">6/45: μ = 138 (σ = 33.7); 6/55: μ = 168 (σ = 44.5). Rejects tickets in the tails.</p>
+                    </div>
+
+                    <!-- F9 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#09. Natural Delta Steps Dispersion</span>
+                            <span class="text-[10px] font-mono text-purple-400 bg-purple-950/60 px-1.5 py-0.5 rounded">Delta Steps</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Spacing between sorted numbers \(\Delta_i = x_{i+1} - x_i\):</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            E[Δ_avg] = N / 6; Fitness_Δ = max(0, 100 - |Δ̄ - N/6|·8 - Penalties)
+                        </div>
+                        <p class="text-[11px] text-slate-500">Penalizes clumping (\(\ge 2\) consecutive triples) and unnatural gaps (\(> N/3\)).</p>
+                    </div>
+
+                    <!-- F10 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#10. Hypergeometric Parity (Odd/Even) Filter</span>
+                            <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded">Parity</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Exact combinatorial probability of drawing \(k\) odd numbers:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            P(Odd = k) = [C(N_odd, k) · C(N_even, 6 - k)] / C(N, 6)
+                        </div>
+                        <p class="text-[11px] text-slate-500">3O:3E (~33%), 4O:2E (~24%), 2O:4E (~24%). Eliminates extreme 6O:0E / 0O:6E.</p>
+                    </div>
+
+                    <!-- F11 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#11. Trailing Digit Diversity</span>
+                            <span class="text-[10px] font-mono text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded">Modular</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Uniform distribution of final digits \(d_i = x_i \pmod{10}\):</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Diversity_digit = |Unique({x_i mod 10})| ≥ 5
+                        </div>
+                        <p class="text-[11px] text-slate-500">Penalizes ticket sets sharing 3 or more identical trailing digits (e.g. 03, 13, 23, 33).</p>
+                    </div>
+
+                    <!-- F12 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#12. Shannon Spatial Entropy</span>
+                            <span class="text-[10px] font-mono text-rose-400 bg-rose-950/60 px-1.5 py-0.5 rounded">Information</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Information entropy across 5 numerical buckets \([B_1, \dots, B_5]\):</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            H = - Σ (p_i · log_2(p_i)), where p_i = count(B_i) / 6
+                        </div>
+                        <p class="text-[11px] text-slate-500">Maximized entropy ensures wide coverage across all decimal tiers (1–9, 10–19, etc.).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 3: Extreme Value, Markov & Repeat Constraints -->
+            <div class="space-y-3">
+                <div class="flex items-center gap-2 pb-1 border-b border-slate-700 text-slate-100 font-bold text-sm md:text-base">
+                    <span class="text-purple-400">Section III:</span> Extreme Value Theory, Markov Regimes & Repeat Constraints
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+
+                    <!-- F13 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#13. Order Statistics & Extreme Value Bounds</span>
+                            <span class="text-[10px] font-mono text-indigo-400 bg-indigo-950/60 px-1.5 py-0.5 rounded">EVT</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Expected values of minimal \(X_{(1)}\) and maximal \(X_{(6)}\) numbers:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            E[X_(1)] = (N + 1) / 7;  E[X_(6)] = 6 · (N + 1) / 7
+                        </div>
+                        <p class="text-[11px] text-slate-500">Mega 6/45: \(E[X_1] \approx 6.6\), \(E[X_6] \approx 39.4\); Power 6/55: \(E[X_1] \approx 8.0\), \(E[X_6] \approx 48.0\).</p>
+                    </div>
+
+                    <!-- F14 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#14. Combinatorial Span (Spread)</span>
+                            <span class="text-[10px] font-mono text-indigo-400 bg-indigo-950/60 px-1.5 py-0.5 rounded">Order Stats</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Theoretical difference between largest and smallest ball drawn:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Span = X_(6) - X_(1);  E[Span] = 5 · (N + 1) / 7
+                        </div>
+                        <p class="text-[11px] text-slate-500">Optimal span is 32.8 in Mega and 40.0 in Power. Penalizes compressed spreads (\(< 20\)).</p>
+                    </div>
+
+                    <!-- F15 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#15. Markov Regime Switching Matrix</span>
+                            <span class="text-[10px] font-mono text-purple-400 bg-purple-950/60 px-1.5 py-0.5 rounded">Markov Chain</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Transition probabilities between Low Compression, Bell Curve, and High Extreme:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            P(S_(t+1) = j | S_t = i) = N_ij / Σ_k N_ik
+                        </div>
+                        <p class="text-[11px] text-slate-500">Dynamically forecasts whether the upcoming draw will contract low or expand high.</p>
+                    </div>
+
+                    <!-- F16 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#16. Mean Reversion Oscillator</span>
+                            <span class="text-[10px] font-mono text-rose-400 bg-rose-950/60 px-1.5 py-0.5 rounded">Oscillator</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Normalized Z-score measuring statistical overbought / oversold regimes:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Z_rev = (X̄_recent - μ_sum) / (σ_sum / √k)
+                        </div>
+                        <p class="text-[11px] text-slate-500">Detects elastic pullback after extreme draws (e.g. following low-compressed #1409).</p>
+                    </div>
+
+                    <!-- F17 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#17. Repeat Constraint (Historical Filter)</span>
+                            <span class="text-[10px] font-mono text-red-400 bg-red-950/60 px-1.5 py-0.5 rounded">Hard Filter</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Eliminating excessive carry-over balls from immediately preceding draw:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            |Combo ∩ LastDraw| ≤ 2  (Heavy penalty -60 if ≥ 3)
+                        </div>
+                        <p class="text-[11px] text-slate-500">Empirical validation: 0.0% of historical draws repeated ≥ 3 numbers. Eliminates dead-weight balls.</p>
+                    </div>
+
+                    <!-- F18 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#18. Consecutive Ball Clumping Penalty</span>
+                            <span class="text-[10px] font-mono text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded">Combinatorics</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Penalizing sequential number runs \(x, x+1, x+2\):</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Penalty_run = 20.0 · max(0, Count(Δ = 1) - 1)
+                        </div>
+                        <p class="text-[11px] text-slate-500">Allows at most 1 pair of adjacent numbers (e.g. 23–24); forbids 3+ sequential balls.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 4: Wheeling Systems & Optimization -->
+            <div class="space-y-3">
+                <div class="flex items-center gap-2 pb-1 border-b border-slate-700 text-slate-100 font-bold text-sm md:text-base">
+                    <span class="text-cyan-400">Section IV:</span> Combinatorial Wheeling Systems & Optimization
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+
+                    <!-- F19 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#19. Covering Design C(v, k, t, m)</span>
+                            <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded">Steiner Systems</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Guarantees a match of \(t\) numbers if \(m\) numbers hit within pool \(v\):</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Covering(v=10, k=6, t=3, m=3) = 4 tickets
+                        </div>
+                        <p class="text-[11px] text-slate-500">Compresses 210 full permutations into 4 tickets, saving 98.1% of capital.</p>
+                    </div>
+
+                    <!-- F20 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#20. Triplet Subspace Coverage Metric</span>
+                            <span class="text-[10px] font-mono text-teal-400 bg-teal-950/60 px-1.5 py-0.5 rounded">Coverage</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Ratio of covered 3-element subsets over all \(\binom{v}{3}\) possible triplets:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Coverage = |U_t (Triplets(t_i))| / C(v, 3) · 100%
+                        </div>
+                        <p class="text-[11px] text-slate-500">Quantifies mathematical guarantee of winning 3rd-tier prize packages.</p>
+                    </div>
+
+                    <!-- F21 -->
+                    <div class="bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/70 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white text-xs">#21. Cross-Matrix Suitability Index</span>
+                            <span class="text-[10px] font-mono text-indigo-400 bg-indigo-950/60 px-1.5 py-0.5 rounded">Decision Theory</span>
+                        </div>
+                        <p class="text-slate-400 text-xs">Relative utility score advising whether to play Mega 6/45 or Power 6/55:</p>
+                        <div class="bg-slate-900/90 p-2 rounded font-mono text-xs text-indigo-300">
+                            Score_type = Σ (w_j · Fitness_j(numbers, Config_type))
+                        </div>
+                        <p class="text-[11px] text-slate-500">Evaluates span compactness, boundary ceiling (\(\le 45\)), and jackpot prize expected value.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="bg-slate-950 p-4 border-t border-slate-800 flex items-center justify-between">
+            <span class="text-xs text-slate-400">All 21 formulas are executed on-demand in the Python analysis backend.</span>
+            <button onclick="closeFormulasModal()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
