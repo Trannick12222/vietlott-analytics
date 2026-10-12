@@ -91,20 +91,24 @@ async function loadDashboard() {
 }
 
 function renderDashboard(data) {
-    renderDrawsTable(data.latest_draws);
-    if (data.statistics) renderFrequencyChart(data.statistics);
-    if (data.statistics) renderHotCold(data.statistics);
-    if (data.predictions && data.predictions.regime_forecast) renderRegimeForecast(data.predictions.regime_forecast);
-    if (data.predictions) renderPredictions(data.predictions);
-    if (data.predictions) renderCombinations(data.predictions);
-    if (data.wheeling_combinations) renderWheeling(data.wheeling_combinations);
-    if (data.bao_combinations) renderBaoCombinations(data.bao_combinations);
-    if (data.predictions) renderProbabilityComparison(data.predictions);
-    if (data.backtest) renderBacktest(data.backtest);
+    try { renderDrawsTable(data.latest_draws); } catch (e) { console.error('Error renderDrawsTable:', e); }
+    try { if (data.statistics) renderFrequencyChart(data.statistics); } catch (e) { console.error('Error renderFrequencyChart:', e); }
+    try { if (data.statistics) renderHotCold(data.statistics); } catch (e) { console.error('Error renderHotCold:', e); }
+    try { if (data.predictions && data.predictions.regime_forecast) renderRegimeForecast(data.predictions.regime_forecast); } catch (e) { console.error('Error renderRegimeForecast:', e); }
+    try { if (data.predictions) renderPredictions(data.predictions); } catch (e) { console.error('Error renderPredictions:', e); }
+    try { if (data.predictions) renderCombinations(data.predictions); } catch (e) { console.error('Error renderCombinations:', e); }
+    try { if (data.wheeling_combinations) renderWheeling(data.wheeling_combinations); } catch (e) { console.error('Error renderWheeling:', e); }
+    try { if (data.bao_combinations) renderBaoCombinations(data.bao_combinations); } catch (e) { console.error('Error renderBaoCombinations:', e); }
+    try { if (data.predictions) renderProbabilityComparison(data.predictions); } catch (e) { console.error('Error renderProbabilityComparison:', e); }
+    try { if (data.backtest) renderBacktest(data.backtest); } catch (e) { console.error('Error renderBacktest:', e); }
     
     // Update info
-    document.getElementById('total-draws').textContent = data.total_draws_in_db || 0;
-    document.getElementById('last-fetch').textContent = data.last_fetch ? new Date(data.last_fetch).toLocaleString('vi-VN') : 'Chưa có';
+    try {
+        const totalEl = document.getElementById('total-draws');
+        const lastFetchEl = document.getElementById('last-fetch');
+        if (totalEl) totalEl.textContent = data.total_draws_in_db || 0;
+        if (lastFetchEl) lastFetchEl.textContent = data.last_fetch ? new Date(data.last_fetch).toLocaleString('vi-VN') : 'Chưa có';
+    } catch (e) { console.error('Error info update:', e); }
     hideLoading();
 }
 
