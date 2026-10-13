@@ -43,11 +43,25 @@ class AnalyticsService:
             raw['weighted_frequency'] = freq.get('weighted_frequency', {})
         
         # Recency scores - convert gaps to scores (higher gap = lower recency score)
+        # Bổ sung bộ giảm tải bão hòa (Saturation Penalty): nếu số đã nổ >= 3 lần trong 4-5 kỳ gần nhất,
+        # xác suất thống kê tiếp tục nổ liên tục suy giảm mạnh (Mean Reversion), cần hạ điểm recency.
         recency = stats_result.recency
+        freq_dict = stats_result.frequency if isinstance(stats_result.frequency, dict) else {}
+        recent_5_counts = freq_dict.get('recent_5_counts', {})
         if isinstance(recency, dict):
             gaps = recency.get('gaps', {})
             max_gap = max(gaps.values()) if gaps else 1
-            raw['recency'] = {num: max(0, max_gap - gap) for num, gap in gaps.items()}
+            rec_scores = {}
+            for num, gap in gaps.items():
+                base_rec = max(0, max_gap - gap)
+                # Nếu đã nổ 3 lần trong 5 kỳ -> phạt 40% điểm phong độ
+                r5 = recent_5_counts.get(num, 0)
+                if r5 >= 3:
+                    base_rec *= 0.55  # Bão hòa cực điểm, ép giảm điểm
+                elif r5 == 2 and gap == 0:
+                    base_rec *= 0.80  # Đã nổ 2 kỳ liên tiếp
+                rec_scores[num] = base_rec
+            raw['recency'] = rec_scores
         
         # Bayesian scores
         bayesian = stats_result.bayesian
