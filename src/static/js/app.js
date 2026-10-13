@@ -441,6 +441,15 @@ function renderCombinations(predictions) {
     }
     
     let html = '';
+    if (predictions.saturated_numbers && predictions.saturated_numbers.length > 0) {
+        const satStr = predictions.saturated_numbers.map(n => `<span class="px-1.5 py-0.5 rounded bg-red-900/60 text-red-200 border border-red-700/60 font-bold">${n < 10 ? '0' + n : n}</span>`).join(' ');
+        html += `<div class="col-span-full mb-3 bg-red-950/40 border border-red-800/60 rounded-lg p-2.5 flex flex-col md:flex-row md:items-center justify-between text-xs text-red-300 gap-2">
+            <span class="flex items-center gap-2">
+                <span>🤖 <strong>Phát hiện quá nhiệt tự động:</strong> Thuật toán tự động phát hiện và tạm khóa ${satStr} khỏi 15 bộ số đề xuất kỳ này (do nổ &ge; 3 lần trong 5 kỳ). Số sẽ <em>tự động mở khóa trở lại</em> khi nhịp nổ hạ nhiệt ở kỳ tiếp theo.</span>
+            </span>
+            <span class="text-[11px] text-red-400 font-mono whitespace-nowrap">Dynamic Mean Reversion</span>
+        </div>`;
+    }
     combos.forEach((c, idx) => {
         const rank = c.rank || (idx + 1);
         const numbersStr = c.numbers.map(n => n < 10 ? '0' + n : '' + n).join(', ');
@@ -649,11 +658,11 @@ function renderBaoCombinations(baoData) {
     let html = '';
     if (baoData.saturated_excluded && baoData.saturated_excluded.length > 0) {
         const satStr = baoData.saturated_excluded.map(n => `<span class="px-1.5 py-0.5 rounded bg-red-900/60 text-red-200 border border-red-700/60 font-bold">${n < 10 ? '0' + n : n}</span>`).join(' ');
-        html += `<div class="col-span-full mb-3 bg-red-950/40 border border-red-800/60 rounded-lg p-2.5 flex items-center justify-between text-xs text-red-300">
+        html += `<div class="col-span-full mb-3 bg-red-950/40 border border-red-800/60 rounded-lg p-2.5 flex flex-col md:flex-row md:items-center justify-between text-xs text-red-300 gap-2">
             <span class="flex items-center gap-2">
-                <span>🛡️ <strong>Bộ lọc quá nhiệt:</strong> Đã tự động loại trừ ${satStr} khỏi mọi dàn bao (nổ &ge; 3 lần trong 5 kỳ) để tránh bẫy cạn kiệt quán tính.</span>
+                <span>🤖 <strong>Phát hiện quá nhiệt tự động:</strong> Thuật toán tự động phát hiện và tạm khóa ${satStr} khỏi các dàn bao kỳ này (do nổ &ge; 3 lần trong 5 kỳ). Số sẽ <em>tự động mở khóa trở lại</em> khi nhịp nổ hạ nhiệt ở kỳ tiếp theo.</span>
             </span>
-            <span class="text-[11px] text-red-400 font-mono">Mean Reversion Protection</span>
+            <span class="text-[11px] text-red-400 font-mono whitespace-nowrap">Dynamic Mean Reversion</span>
         </div>`;
     }
     combos.forEach(c => {

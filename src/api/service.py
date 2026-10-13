@@ -31,10 +31,46 @@ class AnalyticsService:
     def _draws_to_number_lists(self, draws: List[Draw]) -> List[List[int]]:
         """Convert list of Draw ORM objects to list of number lists."""
         return [self._draw_to_numbers(d) for d in draws]
+
+    def _detect_saturated_numbers(self, stats) -> Dict[str, Any]:
+        """
+        Thuật toán phát hiện động các số quá nhiệt (Dynamic Overheat / Anomaly Detector):
+        Tự động tính toán theo từng kỳ quay dựa trên cửa sổ trượt (Sliding Window):
+        1. Ngưỡng cấp độ 1: Xuất hiện >= 3 lần trong 5 kỳ gần nhất (Tần suất >= 60%, P < 1.08% với Power, P < 2.05% với Mega).
+        2. Ngưỡng cấp độ 2: Xuất hiện >= 5 lần trong 10 kỳ gần nhất (Tần suất >= 50%, P < 0.3%).
+        - Khi một số vi phạm ngưỡng xác suất ngoại lệ này, thuật toán tự động đưa vào danh sách hạn chế
+          để phòng ngừa bẫy Mean Reversion (cạn kiệt xung lượng).
+        - Cơ chế tự động phục hồi (Auto-Release): Khi có kỳ quay mới và tần suất giảm xuống dưới ngưỡng,
+          hệ thống tự động mở khóa hoàn toàn mà KHÔNG CẦN can thiệp thủ công.
+        """
+        freq_dict = stats.frequency if isinstance(stats.frequency, dict) else {}
+        recent_5 = freq_dict.get('recent_5_counts', {})
+        recent_10 = freq_dict.get('recent_10_counts', {})
+        
+        saturated_set = set()
+        details = []
+        for num, c5 in recent_5.items():
+            c10 = recent_10.get(num, 0)
+            if c5 >= 3 or c10 >= 5:
+                saturated_set.add(num)
+                details.append({
+                    "number": num,
+                    "recent_5": c5,
+                    "recent_10": c10,
+                    "trigger_rule": ">= 3 lần / 5 kỳ" if c5 >= 3 else ">= 5 lần / 10 kỳ",
+                    "status": "Quá nhiệt (Tự động khóa tạm thời)",
+                    "auto_release": "Tự động mở khóa khi tần suất 5 kỳ < 3"
+                })
+        return {
+            "saturated_set": saturated_set,
+            "details": sorted(details, key=lambda x: x["number"])
+        }
     
     def _build_raw_scores(self, stats_result, config) -> Dict[str, Dict[int, float]]:
         """Extract raw scores from StatisticalResult to feed into EnsembleScoringEngine."""
         raw = {}
+        sat_info = self._detect_saturated_numbers(stats_result)
+        sat_set = sat_info["saturated_set"]
         
         # Frequency scores
         freq = stats_result.frequency
@@ -43,9 +79,9 @@ class AnalyticsService:
         if isinstance(freq, dict):
             raw['frequency'] = freq.get('frequency_pct', {})
             base_w_freq = dict(freq.get('weighted_frequency', {}))
-            # Nếu một số đã nổ >= 3 lần trong 5 kỳ (quá nhiệt/bão hòa), hạ trọng số đà tăng ngắn hạn
-            for num, r5 in recent_5_counts.items():
-                if r5 >= 3 and num in base_w_freq:
+            # Nếu một số vi phạm bộ lọc quá nhiệt động, hạ mạnh trọng số đà tăng ngắn hạn
+            for num in sat_set:
+                if num in base_w_freq:
                     base_w_freq[num] *= 0.45
             raw['weighted_frequency'] = base_w_freq
         
@@ -53,19 +89,15 @@ class AnalyticsService:
         # Bổ sung bộ giảm tải bão hòa (Saturation Penalty): nếu số đã nổ >= 3 lần trong 4-5 kỳ gần nhất,
         # xác suất thống kê tiếp tục nổ liên tục suy giảm mạnh (Mean Reversion), cần hạ điểm recency.
         recency = stats_result.recency
-        freq_dict = stats_result.frequency if isinstance(stats_result.frequency, dict) else {}
-        recent_5_counts = freq_dict.get('recent_5_counts', {})
         if isinstance(recency, dict):
             gaps = recency.get('gaps', {})
             max_gap = max(gaps.values()) if gaps else 1
             rec_scores = {}
             for num, gap in gaps.items():
                 base_rec = max(0, max_gap - gap)
-                # Nếu đã nổ 3 lần trong 5 kỳ -> phạt 40% điểm phong độ
-                r5 = recent_5_counts.get(num, 0)
-                if r5 >= 3:
+                if num in sat_set:
                     base_rec *= 0.55  # Bão hòa cực điểm, ép giảm điểm
-                elif r5 == 2 and gap == 0:
+                elif gap == 0 and recent_5_counts.get(num, 0) == 2:
                     base_rec *= 0.80  # Đã nổ 2 kỳ liên tiếp
                 rec_scores[num] = base_rec
             raw['recency'] = rec_scores
@@ -192,9 +224,8 @@ class AnalyticsService:
         recency_data = stats.recency
         bayesian_data = stats.bayesian
         
-        freq_dict = stats.frequency if isinstance(stats.frequency, dict) else {}
-        recent_5 = freq_dict.get('recent_5_counts', {})
-        saturated = {num for num, c in recent_5.items() if c >= 3}
+        sat_info = self._detect_saturated_numbers(stats)
+        saturated = sat_info["saturated_set"]
 
         for rank_idx, ns in enumerate(ranked, 1):
             num = ns.number
@@ -248,6 +279,7 @@ class AnalyticsService:
             "all_rankings": rankings,
             "combinations": combo_responses,
             "saturated_numbers": sorted(list(saturated)),
+            "dynamic_saturation_report": sat_info["details"],
             "mathematical_probability": round(config.baseline_probability * 100, 2),
             "threshold": threshold,
             "no_numbers_passed": len(filtered) == 0,
@@ -264,9 +296,8 @@ class AnalyticsService:
         if not draws:
             return None
         
-        freq_dict = stats.frequency if isinstance(stats.frequency, dict) else {}
-        recent_5 = freq_dict.get('recent_5_counts', {})
-        saturated = {num for num, c in recent_5.items() if c >= 3}
+        sat_info = self._detect_saturated_numbers(stats)
+        saturated = sat_info["saturated_set"]
 
         last_draw = self._draw_to_numbers(draws[-1]) if draws else []
         combo_gen = CombinationGenerator(config.max_number, config.numbers_per_draw)
@@ -290,6 +321,7 @@ class AnalyticsService:
             "formatted_cost": f"{cost:,} VNĐ",
             "combinations": combo_dicts,
             "saturated_excluded": sorted(list(saturated)),
+            "dynamic_saturation_report": sat_info["details"],
             "total_draws": len(draws)
         }
 
@@ -299,9 +331,8 @@ class AnalyticsService:
         if not draws:
             return None
 
-        freq_dict = stats.frequency if isinstance(stats.frequency, dict) else {}
-        recent_5 = freq_dict.get('recent_5_counts', {})
-        saturated = {num for num, c in recent_5.items() if c >= 3}
+        sat_info = self._detect_saturated_numbers(stats)
+        saturated = sat_info["saturated_set"]
 
         last_draw = self._draw_to_numbers(draws[-1]) if draws else []
         engine = WheelingEngine(config.max_number)
@@ -315,6 +346,7 @@ class AnalyticsService:
         res_dict = wheel_res.to_dict()
         res_dict["lottery_type"] = lottery_type.value
         res_dict["saturated_excluded"] = sorted(list(saturated))
+        res_dict["dynamic_saturation_report"] = sat_info["details"]
         res_dict["total_draws"] = len(draws)
         return res_dict
 
