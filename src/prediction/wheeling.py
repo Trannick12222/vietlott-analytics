@@ -1,6 +1,6 @@
 import math
 import itertools
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Set
 from dataclasses import dataclass
 from .scoring import NumberScore
 
@@ -71,7 +71,7 @@ class WheelingEngine:
     def __init__(self, max_number: int = 45):
         self.max_number = max_number
 
-    def select_best_pool(self, scores: Dict[int, NumberScore], pool_size: int = 12, strategy: str = "balanced", last_draw: Optional[List[int]] = None) -> List[int]:
+    def select_best_pool(self, scores: Dict[int, NumberScore], pool_size: int = 12, strategy: str = "balanced", last_draw: Optional[List[int]] = None, saturated_numbers: Optional[Set[int]] = None) -> List[int]:
         """
         Chọn ra v con số xuất sắc nhất theo từng chiến lược:
         - "balanced" (Mặc định): 70% từ top Model Score cao nhất + 30% từ nhóm phục hồi chu kỳ (cold/rebound)
@@ -79,54 +79,65 @@ class WheelingEngine:
         - "low_comp" (Nén Dải Thấp): Chọn các số điểm cao nhất <= 33 (Mega) hoặc <= 40 (Power), sạch bóng hàng cao
         - "elite" (Thuần Phong Độ): 100% từ top Model Score cao nhất
         - Khống chế trần số lặp từ kỳ liền trước (last_draw): tối đa 1 số (với Wheel 10) hoặc 2 số (với Wheel 12, 14).
+        - Bộ lọc bão hòa (Saturation Filter): Loại trừ hoàn toàn các số nổ >= 3 lần trong 5 kỳ.
         """
-        sorted_scores = sorted(scores.values(), key=lambda x: x.final_model_score, reverse=True)
-        all_numbers = [s.number for s in sorted_scores]
+        sat_set = set(saturated_numbers) if saturated_numbers else set()
+        sorted_scores = [s for s in sorted(scores.values(), key=lambda x: x.final_model_score, reverse=True) if s.number not in sat_set]
+        if len(sorted_scores) < pool_size:
+            sorted_scores = sorted(scores.values(), key=lambda x: x.final_model_score, reverse=True)
+            
+        all_numbers = [s.number for s in sorted_scores if s.number not in sat_set]
         low_limit = 33 if self.max_number == 45 else 40
 
         if strategy == "low_comp":
-            low_candidates = [s.number for s in sorted_scores if s.number <= low_limit]
+            low_candidates = [s.number for s in sorted_scores if s.number <= low_limit and s.number not in sat_set]
             if len(low_candidates) >= pool_size:
                 chosen = list(low_candidates[:pool_size])
             else:
-                remain = [n for n in range(1, low_limit + 1) if n not in low_candidates]
+                remain = [n for n in range(1, low_limit + 1) if n not in low_candidates and n not in sat_set]
                 chosen = list(low_candidates + remain)[:pool_size]
 
         elif strategy == "cold_outbreak":
             hot_count = max(2, int(round(pool_size * 0.35)))
             cold_count = pool_size - hot_count
-            top_hot = [s.number for s in sorted_scores[:hot_count + 3]]
-            top_cold = [s.number for s in sorted_scores[-20:]]
+            top_hot = [s.number for s in sorted_scores[:hot_count + 3] if s.number not in sat_set]
+            top_cold = [s.number for s in sorted_scores[-20:] if s.number not in sat_set]
             chosen = top_hot[:hot_count]
             for c in top_cold:
                 if len(chosen) >= pool_size:
                     break
-                if c not in chosen:
+                if c not in chosen and c not in sat_set:
                     chosen.append(c)
             if len(chosen) < pool_size:
                 for s in sorted_scores:
-                    if s.number not in chosen:
+                    if s.number not in chosen and s.number not in sat_set:
                         chosen.append(s.number)
                     if len(chosen) >= pool_size:
                         break
 
         elif strategy == "elite":
-            chosen = [s.number for s in sorted_scores[:pool_size]]
+            chosen = [s.number for s in sorted_scores[:pool_size] if s.number not in sat_set]
+            if len(chosen) < pool_size:
+                for s in sorted_scores:
+                    if s.number not in chosen and s.number not in sat_set:
+                        chosen.append(s.number)
+                    if len(chosen) >= pool_size:
+                        break
 
         else:  # "balanced"
             hot_count = int(round(pool_size * 0.7))
             cold_count = pool_size - hot_count
-            top_hot = [s.number for s in sorted_scores[:hot_count + 4]]
-            top_cold = [s.number for s in sorted_scores[-18:]]
+            top_hot = [s.number for s in sorted_scores[:hot_count + 4] if s.number not in sat_set]
+            top_cold = [s.number for s in sorted_scores[-18:] if s.number not in sat_set]
             chosen = top_hot[:hot_count]
             for c in top_cold:
                 if len(chosen) >= pool_size:
                     break
-                if c not in chosen:
+                if c not in chosen and c not in sat_set:
                     chosen.append(c)
             if len(chosen) < pool_size:
                 for s in sorted_scores:
-                    if s.number not in chosen:
+                    if s.number not in chosen and s.number not in sat_set:
                         chosen.append(s.number)
                     if len(chosen) >= pool_size:
                         break
@@ -141,15 +152,15 @@ class WheelingEngine:
                 to_remove = set(in_last_sorted[max_repeats:])
                 chosen = [n for n in chosen if n not in to_remove]
                 
-                # Bù các số khác không nằm trong last_draw
-                candidates = [s.number for s in sorted_scores if s.number <= low_limit] if strategy == "low_comp" else all_numbers
-                available = [n for n in candidates if n not in last_draw_set and n not in chosen]
+                # Bù các số khác không nằm trong last_draw và sat_set
+                candidates = [s.number for s in sorted_scores if s.number <= low_limit and s.number not in sat_set] if strategy == "low_comp" else all_numbers
+                available = [n for n in candidates if n not in last_draw_set and n not in chosen and n not in sat_set]
                 needed = pool_size - len(chosen)
                 chosen.extend(available[:needed])
 
         return sorted(chosen[:pool_size])
 
-    def generate_wheel(self, scores: Dict[int, NumberScore], wheel_size: int = 12, strategy: str = "balanced", custom_numbers: Optional[List[int]] = None, last_draw: Optional[List[int]] = None) -> WheelResult:
+    def generate_wheel(self, scores: Dict[int, NumberScore], wheel_size: int = 12, strategy: str = "balanced", custom_numbers: Optional[List[int]] = None, last_draw: Optional[List[int]] = None, saturated_numbers: Optional[Set[int]] = None) -> WheelResult:
         """Sinh dàn vé rút gọn Wheeling System."""
         if wheel_size not in (10, 12, 14):
             wheel_size = 12
@@ -157,7 +168,7 @@ class WheelingEngine:
         if custom_numbers and len(custom_numbers) == wheel_size:
             pool = sorted(custom_numbers)
         else:
-            pool = self.select_best_pool(scores, pool_size=wheel_size, strategy=strategy, last_draw=last_draw)
+            pool = self.select_best_pool(scores, pool_size=wheel_size, strategy=strategy, last_draw=last_draw, saturated_numbers=saturated_numbers)
 
         pattern = OPTIMAL_WHEEL_PATTERNS.get(wheel_size, OPTIMAL_WHEEL_PATTERNS[12])
 

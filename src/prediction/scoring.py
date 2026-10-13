@@ -42,6 +42,7 @@ class NumberScore:
     monte_carlo_score: float = 0.0
     final_model_score: float = 0.0
     confidence_level: str = "Low"
+    is_saturated: bool = False
 
 class EnsembleScoringEngine:
     """
@@ -87,6 +88,7 @@ class EnsembleScoringEngine:
         regime = self._normalize_scores(raw_scores.get('regime_reversion', {}))
         oe = self._normalize_scores(raw_scores.get('odd_even', {}))
         mc = self._normalize_scores(raw_scores.get('monte_carlo', {}))
+        saturated = raw_scores.get('saturated_numbers', {})
         
         results = {}
         for num in range(1, self.max_number + 1):
@@ -112,12 +114,19 @@ class EnsembleScoringEngine:
                 score.odd_even_score * weights.odd_even_balance +
                 score.monte_carlo_score * weights.monte_carlo
             )
+
+            # Phạt quá nhiệt nếu số nổ >= 3 lần trong 5 kỳ (Mean Reversion cạn kiệt)
+            if num in saturated:
+                score.is_saturated = True
+                score.final_model_score = max(5.0, score.final_model_score - 20.0)
             
             # Simple confidence calculation based on variance of top 3 weights
             components = [score.weighted_frequency_score, score.bayesian_score, score.recency_score]
             mean_c = sum(components) / 3
             variance = sum((x - mean_c)**2 for x in components) / 3
-            if variance < 100:
+            if score.is_saturated:
+                score.confidence_level = "Low"
+            elif variance < 100:
                 score.confidence_level = "High"
             elif variance < 400:
                 score.confidence_level = "Medium"

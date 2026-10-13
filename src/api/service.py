@@ -112,6 +112,9 @@ class AnalyticsService:
         else:
             raw['regime_reversion'] = {n: 50.0 for n in range(1, config.max_number + 1)}
         
+        # Saturated numbers tracking (nổ >= 3 lần trong 5 kỳ)
+        raw['saturated_numbers'] = {num: c for num, c in recent_5_counts.items() if c >= 3}
+        
         return raw
 
     def _get_scored_engine(self, lottery_type: LotteryType):
@@ -189,6 +192,10 @@ class AnalyticsService:
         recency_data = stats.recency
         bayesian_data = stats.bayesian
         
+        freq_dict = stats.frequency if isinstance(stats.frequency, dict) else {}
+        recent_5 = freq_dict.get('recent_5_counts', {})
+        saturated = {num for num, c in recent_5.items() if c >= 3}
+
         for rank_idx, ns in enumerate(ranked, 1):
             num = ns.number
             freq_count = freq_data.get('counts', {}).get(num, 0) if isinstance(freq_data, dict) else 0
@@ -203,6 +210,7 @@ class AnalyticsService:
                 "mathematical_probability": round(config.baseline_probability * 100, 2),
                 "frequency": f"{freq_count}/{len(draws)}",
                 "recent_frequency": f"{recent_count}/5",
+                "is_saturated": getattr(ns, 'is_saturated', False),
                 "last_seen": f"{gap} kỳ trước" if gap > 0 else "Kỳ vừa rồi",
                 "gap": gap,
                 "bayesian_estimate": round(bayes_est, 4),
@@ -219,10 +227,10 @@ class AnalyticsService:
         # Filter by threshold
         filtered = [r for r in rankings if r['model_score'] >= threshold]
         
-        # Generate combinations (Đúng 15 dãy số siêu tối ưu)
+        # Generate combinations (Đúng 15 dãy số siêu tối ưu, loại trừ số bão hòa)
         last_draw = self._draw_to_numbers(draws[-1]) if draws else []
         combo_gen = CombinationGenerator(config.max_number, config.numbers_per_draw)
-        combos = combo_gen.generate(scores, num_per_strategy=3, last_draw=last_draw)
+        combos = combo_gen.generate(scores, num_per_strategy=3, last_draw=last_draw, saturated_numbers=saturated)
         combo_responses = [c.to_dict() for c in combos]
         
         sample_warning = None
@@ -239,6 +247,7 @@ class AnalyticsService:
             "rankings": filtered,
             "all_rankings": rankings,
             "combinations": combo_responses,
+            "saturated_numbers": sorted(list(saturated)),
             "mathematical_probability": round(config.baseline_probability * 100, 2),
             "threshold": threshold,
             "no_numbers_passed": len(filtered) == 0,
@@ -255,9 +264,19 @@ class AnalyticsService:
         if not draws:
             return None
         
+        freq_dict = stats.frequency if isinstance(stats.frequency, dict) else {}
+        recent_5 = freq_dict.get('recent_5_counts', {})
+        saturated = {num for num, c in recent_5.items() if c >= 3}
+
         last_draw = self._draw_to_numbers(draws[-1]) if draws else []
         combo_gen = CombinationGenerator(config.max_number, config.numbers_per_draw)
-        bao_combos = combo_gen.generate_bao(scores, bao_type=bao_type, num_per_strategy=1, last_draw=last_draw)
+        bao_combos = combo_gen.generate_bao(
+            scores, 
+            bao_type=bao_type, 
+            num_per_strategy=1, 
+            last_draw=last_draw,
+            saturated_numbers=saturated
+        )
         combo_dicts = [c.to_dict() for c in bao_combos]
 
         ticket_count = bao_combos[0].ticket_count if bao_combos else 0
@@ -270,6 +289,7 @@ class AnalyticsService:
             "cost": cost,
             "formatted_cost": f"{cost:,} VNĐ",
             "combinations": combo_dicts,
+            "saturated_excluded": sorted(list(saturated)),
             "total_draws": len(draws)
         }
 
@@ -279,11 +299,22 @@ class AnalyticsService:
         if not draws:
             return None
 
+        freq_dict = stats.frequency if isinstance(stats.frequency, dict) else {}
+        recent_5 = freq_dict.get('recent_5_counts', {})
+        saturated = {num for num, c in recent_5.items() if c >= 3}
+
         last_draw = self._draw_to_numbers(draws[-1]) if draws else []
         engine = WheelingEngine(config.max_number)
-        wheel_res = engine.generate_wheel(scores, wheel_size=wheel_size, strategy=strategy, last_draw=last_draw)
+        wheel_res = engine.generate_wheel(
+            scores, 
+            wheel_size=wheel_size, 
+            strategy=strategy, 
+            last_draw=last_draw,
+            saturated_numbers=saturated
+        )
         res_dict = wheel_res.to_dict()
         res_dict["lottery_type"] = lottery_type.value
+        res_dict["saturated_excluded"] = sorted(list(saturated))
         res_dict["total_draws"] = len(draws)
         return res_dict
 

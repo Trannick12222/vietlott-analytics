@@ -88,3 +88,25 @@ def test_generate_bao_combinations():
             assert "score" in d
             assert "odd_count" in d
             assert "even_count" in d
+
+def test_saturated_numbers_exclusion():
+    gen = CombinationGenerator(max_number=55, numbers_per_draw=6)
+    scores = {n: NumberScore(number=n, final_model_score=float(n)) for n in range(1, 56)}
+    # Let numbers 27 and 7 be top-scoring and saturated
+    scores[27].final_model_score = 99.0
+    scores[7].final_model_score = 98.0
+    saturated = {27, 7}
+
+    # Test standard generation
+    combos = gen.generate(scores, num_per_strategy=2, saturated_numbers=saturated)
+    for c in combos:
+        assert 27 not in c.numbers, "Saturated number 27 must not appear in any standard combo"
+        assert 7 not in c.numbers, "Saturated number 7 must not appear in any standard combo"
+
+    # Test Bao generation for all sizes
+    for b in [5, 7, 8, 9, 10, 12, 14, 18]:
+        bao_combos = gen.generate_bao(scores, bao_type=b, saturated_numbers=saturated)
+        for c in bao_combos:
+            assert 27 not in c.numbers, f"Saturated number 27 must not appear in Bao {b} ({c.strategy})"
+            assert 7 not in c.numbers, f"Saturated number 7 must not appear in Bao {b} ({c.strategy})"
+

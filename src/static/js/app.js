@@ -291,9 +291,10 @@ function renderPredictions(predictions) {
         const scoreClass = r.model_score >= 70 ? 'score-high' : r.model_score >= 40 ? 'score-medium' : 'score-low';
         const confClass = r.confidence === 'High' ? 'confidence-high' : r.confidence === 'Medium' ? 'confidence-medium' : 'confidence-low';
         const regimeScoreVal = r.regime_score !== undefined ? r.regime_score.toFixed(1) : '--';
-        html += `<tr class="border-b border-slate-800 hover:bg-slate-800/50">
+        const satBadge = r.is_saturated ? `<span class="ml-1 px-1.5 py-0.5 rounded text-[10px] bg-red-900/80 text-red-200 border border-red-700 font-semibold" title="${isEn ? 'Drawn >=3 times in last 5 draws (Overheated - filtered out of recommendations)' : 'Đã nổ ≥3 lần trong 5 kỳ (Quá nhiệt - Đã loại khỏi gợi ý)'}">🔥 ${isEn ? 'Overheated' : 'Quá nhiệt'}</span>` : '';
+        html += `<tr class="border-b border-slate-800 hover:bg-slate-800/50 ${r.is_saturated ? 'bg-red-950/20' : ''}">
             <td class="py-2 px-2 text-gray-400">${i + 1}</td>
-            <td class="py-2 px-2">${renderBalls([r.number], 'ball-sm')}</td>
+            <td class="py-2 px-2"><div class="flex items-center gap-1">${renderBalls([r.number], 'ball-sm')}${satBadge}</div></td>
             <td class="py-2 px-2"><div class="flex items-center gap-2"><span class="text-white font-bold">${r.model_score.toFixed(1)}</span><div class="score-bar w-20"><div class="score-bar-fill ${scoreClass}" style="width:${r.model_score}%"></div></div></div></td>
             <td class="py-2 px-2 text-gray-400">${r.mathematical_probability}%</td>
             <td class="py-2 px-2 text-gray-300 font-mono text-xs">${r.frequency}</td>
@@ -646,6 +647,15 @@ function renderBaoCombinations(baoData) {
     };
 
     let html = '';
+    if (baoData.saturated_excluded && baoData.saturated_excluded.length > 0) {
+        const satStr = baoData.saturated_excluded.map(n => `<span class="px-1.5 py-0.5 rounded bg-red-900/60 text-red-200 border border-red-700/60 font-bold">${n < 10 ? '0' + n : n}</span>`).join(' ');
+        html += `<div class="col-span-full mb-3 bg-red-950/40 border border-red-800/60 rounded-lg p-2.5 flex items-center justify-between text-xs text-red-300">
+            <span class="flex items-center gap-2">
+                <span>🛡️ <strong>Bộ lọc quá nhiệt:</strong> Đã tự động loại trừ ${satStr} khỏi mọi dàn bao (nổ &ge; 3 lần trong 5 kỳ) để tránh bẫy cạn kiệt quán tính.</span>
+            </span>
+            <span class="text-[11px] text-red-400 font-mono">Mean Reversion Protection</span>
+        </div>`;
+    }
     combos.forEach(c => {
         const badgeClass = badgeColors[c.strategy] || 'bg-blue-900 text-blue-300 border-blue-600';
         html += `<div class="bg-slate-800 rounded-xl p-4 border border-slate-700 shadow-lg flex flex-col justify-between hover:border-indigo-500 transition-all">

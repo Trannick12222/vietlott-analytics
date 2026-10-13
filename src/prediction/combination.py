@@ -153,7 +153,7 @@ class CombinationGenerator:
         fitness = max(0.0, base_fitness - repeat_penalty)
         return fitness, s, deltas, ratio_str
 
-    def generate(self, scores: Dict[int, NumberScore], num_per_strategy: int = 3, filter_odd_even: bool = True, last_draw: Optional[List[int]] = None) -> List[Combination]:
+    def generate(self, scores: Dict[int, NumberScore], num_per_strategy: int = 3, filter_odd_even: bool = True, last_draw: Optional[List[int]] = None, saturated_numbers: Optional[Set[int]] = None) -> List[Combination]:
         """
         Tạo danh sách các bộ số bao quát 5 chiến lược toàn diện (mặc định đúng 15 dãy số):
         1. Tối Ưu Phong Độ (Elite Hot): tập trung bóng điểm cao, chuẩn Gauss.
@@ -162,17 +162,23 @@ class CombinationGenerator:
         4. Nén Dải Thấp (Statistical Compression): co cụm dải thấp <= 33/40, tổng nén.
         5. Bước Nhảy Delta (Random Spread): phân bổ đều 6 dải, chữ số đuôi đa dạng.
         - Khống chế: Tối đa chỉ cho phép 1 (tối đa 2) số lặp lại từ kỳ trước (last_draw), tuyệt đối loại bỏ các vé có >= 3 số lặp.
+        - Bộ lọc bão hòa (Saturation Filter): Loại bỏ hoàn toàn các số nổ >= 3 lần trong 5 kỳ khỏi toàn bộ các bộ số đề xuất.
         """
+        sat_set = set(saturated_numbers) if saturated_numbers else set()
         sorted_scores = sorted(scores.values(), key=lambda x: x.final_model_score, reverse=True)
-        pool_size = min(len(sorted_scores), max(25, self.numbers_per_draw * 4))
-        hot_nums = [s.number for s in sorted_scores[:pool_size]]
-        cold_nums = [s.number for s in sorted_scores[-pool_size:]]
+        clean_sorted_scores = [s for s in sorted_scores if s.number not in sat_set]
+        if len(clean_sorted_scores) < 15:
+            clean_sorted_scores = sorted_scores
+
+        pool_size = min(len(clean_sorted_scores), max(25, self.numbers_per_draw * 4))
+        hot_nums = [s.number for s in clean_sorted_scores[:pool_size]]
+        cold_nums = [s.number for s in clean_sorted_scores[-pool_size:]]
 
         low_bound = 33 if self.max_number == 45 else 40
-        low_pool = [n for n in range(1, low_bound + 1)]
-        hot_teen_nums = [n for n in hot_nums if n >= 10]
+        low_pool = [n for n in range(1, low_bound + 1) if n not in sat_set]
+        hot_teen_nums = [n for n in hot_nums if n >= 10 and n not in sat_set]
         if len(hot_teen_nums) < 12:
-            extra_teens = [s.number for s in sorted_scores if s.number >= 10 and s.number not in hot_teen_nums]
+            extra_teens = [s.number for s in clean_sorted_scores if s.number >= 10 and s.number not in hot_teen_nums and s.number not in sat_set]
             hot_teen_nums.extend(extra_teens[:15])
 
         # Sinh 5 tập ứng viên chuyên biệt:
@@ -188,6 +194,8 @@ class CombinationGenerator:
         # 1. Elite (Hot): thuần Hot, tổng chuẩn Gauss
         for _ in range(1500):
             c = sorted(random.sample(hot_nums, self.numbers_per_draw))
+            if sat_set and any(n in sat_set for n in c):
+                continue
             if last_draw and len(set(c) & set(last_draw)) >= 3:
                 continue
             fit, s, deltas, ratio = self._evaluate_candidate(c, scores, last_draw=last_draw)
@@ -197,6 +205,8 @@ class CombinationGenerator:
         # 2. Rebound (Balanced): 3 Hot + 3 Cold
         for _ in range(1500):
             c = sorted(random.sample(hot_nums, 3) + random.sample(cold_nums, 3))
+            if sat_set and any(n in sat_set for n in c):
+                continue
             if last_draw and len(set(c) & set(last_draw)) >= 3:
                 continue
             fit, s, deltas, ratio = self._evaluate_candidate(c, scores, last_draw=last_draw)
@@ -206,6 +216,8 @@ class CombinationGenerator:
         # 3. Outbreak (Cold Outbreak / Dị Biệt): 2 Hot + 4 Cold, tổng mở rộng dải cao
         for _ in range(2500):
             c = sorted(random.sample(hot_nums, 2) + random.sample(cold_nums, 4))
+            if sat_set and any(n in sat_set for n in c):
+                continue
             if last_draw and len(set(c) & set(last_draw)) >= 3:
                 continue
             fit, s, deltas, ratio = self._evaluate_candidate(c, scores, last_draw=last_draw)
@@ -215,6 +227,8 @@ class CombinationGenerator:
         # 4. Low Compression (Statistical): Nén dải thấp <= low_bound
         for _ in range(2000):
             c = sorted(random.sample(low_pool, self.numbers_per_draw))
+            if sat_set and any(n in sat_set for n in c):
+                continue
             if last_draw and len(set(c) & set(last_draw)) >= 3:
                 continue
             fit, s, deltas, ratio = self._evaluate_candidate(c, scores, last_draw=last_draw)
@@ -223,10 +237,15 @@ class CombinationGenerator:
 
         # 5. Delta Spread (Random Spread): phân bổ đều qua các dải buckets
         step = self.max_number / 6.0
-        buckets = [[n for n in range(1, self.max_number + 1) if (i * step) < n <= ((i + 1) * step)] for i in range(6)]
+        buckets = [[n for n in range(1, self.max_number + 1) if (i * step) < n <= ((i + 1) * step) and n not in sat_set] for i in range(6)]
         for _ in range(1500):
-            c = sorted([random.choice(b) for b in buckets if b])
+            valid_buckets = [b for b in buckets if b]
+            if len(valid_buckets) < self.numbers_per_draw:
+                continue
+            c = sorted([random.choice(b) for b in valid_buckets[:self.numbers_per_draw]])
             if len(set(c)) == self.numbers_per_draw:
+                if sat_set and any(n in sat_set for n in c):
+                    continue
                 if last_draw and len(set(c) & set(last_draw)) >= 3:
                     continue
                 fit, s, deltas, ratio = self._evaluate_candidate(c, scores, last_draw=last_draw)
@@ -333,19 +352,30 @@ class CombinationGenerator:
         scores: Dict[int, NumberScore],
         bao_type: int = 7,
         num_per_strategy: int = 1,
-        last_draw: Optional[List[int]] = None
+        last_draw: Optional[List[int]] = None,
+        saturated_numbers: Optional[Set[int]] = None
     ) -> List[BaoCombination]:
-        """Sinh các dàn số Bao tối ưu có khống chế trần số lặp lại từ kỳ liền trước."""
+        """
+        Sinh các dàn số Bao tối ưu có khống chế trần số lặp lại từ kỳ liền trước
+        và loại bỏ dứt điểm các số bão hòa quá nhiệt (đã nổ >= 3 lần trong 5 kỳ).
+        """
         valid_baos = [5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18]
         if bao_type not in valid_baos:
             bao_type = 7
 
         k = bao_type
+        sat_set = set(saturated_numbers) if saturated_numbers else set()
+        
+        # Loại trừ triệt để các số đã bão hòa quá nhiệt khỏi tập ứng viên
         sorted_scores = sorted(scores.values(), key=lambda x: x.final_model_score, reverse=True)
-        all_numbers = [s.number for s in sorted_scores]
-        pool_size = min(len(sorted_scores), max(k + 6, 20))
-        hot_pool = [s.number for s in sorted_scores[:pool_size]]
-        cold_pool = [s.number for s in sorted_scores[-pool_size:]]
+        clean_scores = [s for s in sorted_scores if s.number not in sat_set]
+        if len(clean_scores) < k:
+            clean_scores = sorted_scores
+
+        all_numbers = [s.number for s in clean_scores]
+        pool_size = min(len(clean_scores), max(k + 6, 20))
+        hot_pool = [s.number for s in clean_scores[:pool_size]]
+        cold_pool = [s.number for s in clean_scores[-pool_size:]]
 
         # Nới lỏng khống chế lặp: Cho phép linh hoạt tới 2 số rơi tự do (Back-to-back)
         max_repeats = 2 if k >= 7 else 1
@@ -362,13 +392,13 @@ class CombinationGenerator:
             to_remove = set(in_last_sorted[max_repeats:])
 
             clean_combo = [n for n in combo_nums if n not in to_remove]
-            available = [n for n in candidates_pool if n not in last_draw_set and n not in clean_combo]
+            available = [n for n in candidates_pool if n not in last_draw_set and n not in clean_combo and n not in sat_set]
             available_sorted = sorted(available, key=lambda n: scores[n].final_model_score, reverse=True)
             needed = k - len(clean_combo)
             clean_combo.extend(available_sorted[:needed])
 
             if len(clean_combo) < k:
-                more_avail = [n for n in all_numbers if n not in clean_combo and n not in to_remove]
+                more_avail = [n for n in all_numbers if n not in clean_combo and n not in to_remove and n not in sat_set]
                 clean_combo.extend(more_avail[:k - len(clean_combo)])
 
             return clean_combo[:k]
@@ -393,16 +423,15 @@ class CombinationGenerator:
         for c_num in cold_pool:
             if len(combo_s2) >= k:
                 break
-            if c_num not in combo_s2:
+            if c_num not in combo_s2 and c_num not in sat_set:
                 combo_s2.append(c_num)
         combo_s2 = enforce_repeat_limit(combo_s2, all_numbers)
         results.append(self._build_bao_object(combo_s2, "Cân bằng Hot & Cold", scores, k))
 
         # 3. Chiến lược: Trải Đều Dải Số - Bước Nhảy Rộng (Wide Delta Spread - 6 Buckets)
-        # Chia thành 6 phân vùng bao quát trọn vẹn từ 1 đến max_number
         step = self.max_number / 6.0
         buckets = [
-            [n for n in all_numbers if (i * step) < n <= ((i + 1) * step)]
+            [n for n in all_numbers if (i * step) < n <= ((i + 1) * step) and n not in sat_set]
             for i in range(6)
         ]
         spread_combo = []
@@ -411,7 +440,7 @@ class CombinationGenerator:
             added_in_round = False
             for b in buckets:
                 top_in_b = sorted(b, key=lambda n: scores[n].final_model_score, reverse=True)
-                if len(top_in_b) > tier and top_in_b[tier] not in spread_combo:
+                if len(top_in_b) > tier and top_in_b[tier] not in spread_combo and top_in_b[tier] not in sat_set:
                     spread_combo.append(top_in_b[tier])
                     added_in_round = True
                     if len(spread_combo) >= k:
@@ -428,19 +457,19 @@ class CombinationGenerator:
         for c_num in cold_pool:
             if len(combo_s4) >= k:
                 break
-            if c_num not in combo_s4:
+            if c_num not in combo_s4 and c_num not in sat_set:
                 combo_s4.append(c_num)
         combo_s4 = enforce_repeat_limit(combo_s4, all_numbers)
         results.append(self._build_bao_object(combo_s4, "Săn Số Gan (Cold Outbreak)", scores, k))
 
         # 5. Chiến lược: Nén Dải Thấp (Statistical Compression)
         low_limit = 33 if self.max_number == 45 else 40
-        low_pool_candidates = [n for n in all_numbers if n <= low_limit]
+        low_pool_candidates = [n for n in all_numbers if n <= low_limit and n not in sat_set]
         top_low_deterministic = sorted(low_pool_candidates, key=lambda n: scores[n].final_model_score, reverse=True)
         combo_s5 = list(top_low_deterministic[:k])
         if len(combo_s5) < k:
             for extra in all_numbers:
-                if extra not in combo_s5:
+                if extra not in combo_s5 and extra not in sat_set:
                     combo_s5.append(extra)
                 if len(combo_s5) >= k:
                     break
