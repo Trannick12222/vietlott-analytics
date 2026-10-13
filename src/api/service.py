@@ -38,9 +38,16 @@ class AnalyticsService:
         
         # Frequency scores
         freq = stats_result.frequency
+        freq_dict = freq if isinstance(freq, dict) else {}
+        recent_5_counts = freq_dict.get('recent_5_counts', {})
         if isinstance(freq, dict):
             raw['frequency'] = freq.get('frequency_pct', {})
-            raw['weighted_frequency'] = freq.get('weighted_frequency', {})
+            base_w_freq = dict(freq.get('weighted_frequency', {}))
+            # Nếu một số đã nổ >= 3 lần trong 5 kỳ (quá nhiệt/bão hòa), hạ trọng số đà tăng ngắn hạn
+            for num, r5 in recent_5_counts.items():
+                if r5 >= 3 and num in base_w_freq:
+                    base_w_freq[num] *= 0.45
+            raw['weighted_frequency'] = base_w_freq
         
         # Recency scores - convert gaps to scores (higher gap = lower recency score)
         # Bổ sung bộ giảm tải bão hòa (Saturation Penalty): nếu số đã nổ >= 3 lần trong 4-5 kỳ gần nhất,
