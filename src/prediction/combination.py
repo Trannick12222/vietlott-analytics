@@ -111,10 +111,11 @@ class CombinationGenerator:
 
         deltas = [combo[i] - combo[i - 1] for i in range(1, len(combo))]
         avg_delta = sum(deltas) / float(len(deltas)) if deltas else 1.0
-        consecutives = sum(1 for d in deltas if d == 1)
-        large_deltas = sum(1 for d in deltas if d > (self.max_number // 3))
-        delta_penalty = max(0, consecutives - 1) * 20.0 + large_deltas * 12.0
-        delta_fit = max(0.0, 100.0 - abs(avg_delta - self.ideal_delta_avg) * 8.0 - delta_penalty)
+        # Bước nhảy tự nhiên: chỉ phạt nếu dồn quá nhiều số sát nhau (consecutives >= 3) hoặc khoảng cách cực đoan > 25
+        consecutives_3 = sum(1 for i in range(len(deltas) - 1) if deltas[i] == 1 and deltas[i+1] == 1)
+        extreme_deltas = sum(1 for d in deltas if d > 25)
+        delta_penalty = consecutives_3 * 25.0 + extreme_deltas * 8.0
+        delta_fit = max(0.0, 100.0 - abs(avg_delta - self.ideal_delta_avg) * 5.0 - delta_penalty)
 
         last_digits = [n % 10 for n in combo]
         unique_digits = len(set(last_digits))
@@ -346,7 +347,8 @@ class CombinationGenerator:
         hot_pool = [s.number for s in sorted_scores[:pool_size]]
         cold_pool = [s.number for s in sorted_scores[-pool_size:]]
 
-        max_repeats = 1 if k <= 8 else 2
+        # Nới lỏng khống chế lặp: Cho phép linh hoạt tới 2 số rơi tự do (Back-to-back)
+        max_repeats = 2 if k >= 7 else 1
 
         def enforce_repeat_limit(combo_nums: List[int], candidates_pool: List[int]) -> List[int]:
             if not last_draw:
@@ -374,11 +376,8 @@ class CombinationGenerator:
         results = []
 
         # 1. Chiến lược: Tối ưu Model Score (Hot Elite)
-        # Lấy top các số điểm cao nhất, ưu tiên cân đối chẵn lẻ và khống chế lặp
         top_candidates = hot_pool[:min(len(hot_pool), k + 4)]
-        # Chọn k số từ top_candidates có độ lệch chẵn/lẻ nhỏ nhất
         best_combo_s1 = sorted(top_candidates[:k])
-        # Nếu lệch chẵn lẻ cực đoan (toàn chẵn hoặc toàn lẻ), hoán đổi với số tiếp theo
         odds_s1 = sum(1 for n in best_combo_s1 if n % 2 != 0)
         if (odds_s1 == 0 or odds_s1 == k) and len(top_candidates) > k:
             for extra in top_candidates[k:]:
@@ -389,9 +388,7 @@ class CombinationGenerator:
         results.append(self._build_bao_object(best_combo_s1, "Tối ưu Model Score", scores, k))
 
         # 2. Chiến lược: Cân bằng Hot & Cold (Balanced Rebound)
-        # Xác định tỷ lệ cố định 60% Hot + 40% Cold (hoàn toàn xác định)
         hot_count = max(3, int(round(k * 0.6)))
-        cold_count = k - hot_count
         combo_s2 = list(hot_pool[:hot_count])
         for c_num in cold_pool:
             if len(combo_s2) >= k:
@@ -401,13 +398,13 @@ class CombinationGenerator:
         combo_s2 = enforce_repeat_limit(combo_s2, all_numbers)
         results.append(self._build_bao_object(combo_s2, "Cân bằng Hot & Cold", scores, k))
 
-        # 3. Chiến lược: Phân bổ Đều Dải Số (Bucket Spread)
-        step = self.max_number / 5.0
+        # 3. Chiến lược: Trải Đều Dải Số - Bước Nhảy Rộng (Wide Delta Spread - 6 Buckets)
+        # Chia thành 6 phân vùng bao quát trọn vẹn từ 1 đến max_number
+        step = self.max_number / 6.0
         buckets = [
             [n for n in all_numbers if (i * step) < n <= ((i + 1) * step)]
-            for i in range(5)
+            for i in range(6)
         ]
-        # Bốc đều lần lượt các số điểm cao nhất từ mỗi bucket
         spread_combo = []
         tier = 0
         while len(spread_combo) < k:
@@ -426,7 +423,6 @@ class CombinationGenerator:
         results.append(self._build_bao_object(spread_combo, "Phân bổ Đều Dải Số", scores, k))
 
         # 4. Chiến lược: Săn Số Gan (Cold Outbreak - Dị Biệt)
-        # 30% Hot + 70% Cold gan lớn nhất
         hot_count_s4 = max(2, int(round(k * 0.3)))
         combo_s4 = list(hot_pool[:hot_count_s4])
         for c_num in cold_pool:
