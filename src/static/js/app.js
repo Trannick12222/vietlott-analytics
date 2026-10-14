@@ -774,10 +774,45 @@ function renderWheeling(wheelData) {
     if (poolSizeEl) poolSizeEl.textContent = wheelData.wheel_size;
     if (descEl) descEl.textContent = wheelData.guarantee_desc;
 
-    // Render tập bóng gốc
+    // Banner loại trừ quá nhiệt động
+    const satBannerEl = document.getElementById('wheel-sat-banner');
+    if (satBannerEl) {
+        if (wheelData.saturated_excluded && wheelData.saturated_excluded.length > 0) {
+            const satStr = wheelData.saturated_excluded.map(n => `<span class="px-1.5 py-0.5 rounded bg-red-900/60 text-red-200 border border-red-700/60 font-bold">${n < 10 ? '0' + n : n}</span>`).join(' ');
+            satBannerEl.innerHTML = `<div class="bg-red-950/40 border border-red-800/60 rounded-lg p-2 text-xs text-red-300 flex items-center justify-between">
+                <span>🤖 <strong>Phát hiện quá nhiệt:</strong> Đã loại trừ ${satStr} khỏi dàn bóng gốc. Tự động mở khóa khi hạ nhiệt.</span>
+                <span class="text-[10px] text-red-400 font-mono">Dynamic Reversion</span>
+            </div>`;
+        } else {
+            satBannerEl.innerHTML = '';
+        }
+    }
+
+    // Render tập bóng gốc & thống kê
     const poolContainer = document.getElementById('wheel-pool-container');
+    const statsContainer = document.getElementById('wheel-pool-stats');
     if (poolContainer && wheelData.selected_numbers) {
         poolContainer.innerHTML = renderBalls(wheelData.selected_numbers, 'ball-md');
+        if (statsContainer) {
+            const nums = wheelData.selected_numbers;
+            const odds = nums.filter(n => n % 2 !== 0).length;
+            const evens = nums.length - odds;
+            const lowBound = (currentLotteryType === 'MEGA_645') ? 33 : 40;
+            const lows = nums.filter(n => n <= lowBound).length;
+            const highs = nums.length - lows;
+            const stratLabels = {
+                'balanced': 'Cân Bằng Chuẩn',
+                'cold_outbreak': 'Săn Số Gan (Dị Biệt)',
+                'low_comp': 'Nén Dải Thấp',
+                'elite': 'Thuần Phong Độ'
+            };
+            const stratText = stratLabels[wheelData.strategy] || wheelData.strategy;
+            statsContainer.innerHTML = `
+                <span>Cấu trúc: <strong class="text-slate-200 font-mono">${evens}C : ${odds}L</strong></span>
+                <span>Phân bố: <strong class="text-slate-200 font-mono">${lows} Thấp (≤${lowBound}) : ${highs} Cao</strong></span>
+                <span>Chiến lược: <strong class="text-emerald-400 font-semibold">${stratText}</strong></span>
+            `;
+        }
     }
 
     // Render danh sách vé nén
